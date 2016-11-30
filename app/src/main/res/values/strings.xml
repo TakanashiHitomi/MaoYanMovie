@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MaoYanMovie</string>
+    <string name="movie">Movie</string>
+    <string name="theater">Theater</string>
+    <string name="discover">Discover</string>
+    <string name="user">User</string>
+
 </resources>

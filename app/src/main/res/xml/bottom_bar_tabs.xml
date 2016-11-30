@@ -1,0 +1,18 @@
+<tabs>
+    <tab
+            icon="@drawable/ic_movie"
+            id="@+id/tab_movie"
+            title="@string/movie"/>
+    <tab
+            icon="@drawable/ic_theater"
+            id="@+id/tab_theater"
+            title="@string/theater"/>
+    <tab
+            icon="@drawable/ic_discover"
+            id="@+id/tab_discover"
+            title="@string/discover"/>
+    <tab
+            icon="@drawable/ic_user"
+            id="@+id/tab_user"
+            title="@string/user"/>
+</tabs>

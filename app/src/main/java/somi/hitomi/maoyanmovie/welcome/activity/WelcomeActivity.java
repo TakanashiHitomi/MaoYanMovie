@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.activity;
+package somi.hitomi.maoyanmovie.welcome.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,8 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.common.BaseActivity;
 import somi.hitomi.maoyanmovie.domain.MainInfoBean;
-import somi.hitomi.maoyanmovie.fragment.WelcomeExtraFragment;
-import somi.hitomi.maoyanmovie.fragment.WelcomeMainFragment;
+import somi.hitomi.maoyanmovie.welcome.fragment.WelcomeExtraFragment;
+import somi.hitomi.maoyanmovie.welcome.fragment.WelcomeMainFragment;
 import somi.hitomi.maoyanmovie.net.WelcomeInfoService;
 import somi.hitomi.maoyanmovie.utils.Constant;
 

@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.fragment;
+package somi.hitomi.maoyanmovie.welcome.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

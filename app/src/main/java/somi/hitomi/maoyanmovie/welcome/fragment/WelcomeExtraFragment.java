@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.fragment;
+package somi.hitomi.maoyanmovie.welcome.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
-import somi.hitomi.maoyanmovie.activity.WelcomeActivity;
+import somi.hitomi.maoyanmovie.welcome.activity.WelcomeActivity;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 
 /**
