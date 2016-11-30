@@ -17,10 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.common.BaseActivity;
 import somi.hitomi.maoyanmovie.domain.MainInfoBean;
+import somi.hitomi.maoyanmovie.net.RetrofitAPI;
+import somi.hitomi.maoyanmovie.utils.Constant;
 import somi.hitomi.maoyanmovie.welcome.fragment.WelcomeExtraFragment;
 import somi.hitomi.maoyanmovie.welcome.fragment.WelcomeMainFragment;
-import somi.hitomi.maoyanmovie.net.WelcomeInfoService;
-import somi.hitomi.maoyanmovie.utils.Constant;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -56,7 +56,7 @@ public class WelcomeActivity extends BaseActivity {
                 .baseUrl(Constant.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(WelcomeInfoService.class)
+                .create(RetrofitAPI.WelcomeInfoAPI.class)
                 .getMainInfo()
                 .enqueue(new Callback<MainInfoBean>() {
                     @Override

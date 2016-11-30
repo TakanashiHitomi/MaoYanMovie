@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
-import somi.hitomi.maoyanmovie.welcome.activity.WelcomeActivity;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
+import somi.hitomi.maoyanmovie.welcome.activity.WelcomeActivity;
 
 /**
  * Created by HitomiT on 2016/11/30.
@@ -37,9 +37,11 @@ public class WelcomeExtraFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (WelcomeActivity) getActivity();
-        welcomeImageUrl = mActivity.postersBean.getPic();
-        duration = mActivity.postersBean.getDuration();
-        canSkip = mActivity.postersBean.isCanSkip();
+        if (mActivity.postersBean != null) {
+            welcomeImageUrl = mActivity.postersBean.getPic();
+            duration = mActivity.postersBean.getDuration();
+            canSkip = mActivity.postersBean.isCanSkip();
+        }
     }
 
     @Nullable
