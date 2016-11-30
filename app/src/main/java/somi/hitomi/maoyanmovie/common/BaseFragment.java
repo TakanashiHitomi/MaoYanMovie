@@ -12,7 +12,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initContext();
         getDataFromNet();
+    }
+
+    protected void initContext() {
+
     }
 
     protected void getDataFromNet() {

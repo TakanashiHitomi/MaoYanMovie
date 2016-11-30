@@ -3,6 +3,8 @@ package somi.hitomi.maoyanmovie.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
+import somi.hitomi.maoyanmovie.activity.MainActivity;
+import somi.hitomi.maoyanmovie.adapter.HotMovieListAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
@@ -37,7 +41,10 @@ public class MovieFragment extends BaseFragment {
     SegmentTabLayout mTitleSegTab;
     @BindView(R.id.title_city)
     AppCompatButton mTitleCity;
+    @BindView(R.id.movie_hot_list)
+    RecyclerView mMovieHotList;
     private List<MovieListBean.DataBean.MoviesBean> movies;
+    private MainActivity mActivity;
 
     @Nullable
     @Override
@@ -64,6 +71,8 @@ public class MovieFragment extends BaseFragment {
                     @Override
                     public void onResponse(Call<MovieListBean> call, Response<MovieListBean> response) {
                         movies = response.body().getData().getMovies();
+                        Logger.i(movies.get(0).toString());
+                        setAdapter();
                     }
 
                     @Override
@@ -71,5 +80,16 @@ public class MovieFragment extends BaseFragment {
                         Logger.e(t.getMessage());
                     }
                 });
+    }
+
+    @Override
+    protected void initContext() {
+        mActivity = (MainActivity) getActivity();
+    }
+
+    private void setAdapter() {
+        mMovieHotList.setLayoutManager(new LinearLayoutManager(mActivity));
+
+        mMovieHotList.setAdapter(new HotMovieListAdapter(mActivity, movies));
     }
 }

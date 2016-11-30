@@ -273,7 +273,7 @@ public class MovieListBean {
             private String src;
             private String img;
             private String nm;
-            private int sc;
+            private double sc;
             private String ver;
             private String rt;
             private String scm;
@@ -476,11 +476,11 @@ public class MovieListBean {
                 this.nm = nm;
             }
 
-            public int getSc() {
+            public double getSc() {
                 return sc;
             }
 
-            public void setSc(int sc) {
+            public void setSc(double sc) {
                 this.sc = sc;
             }
 

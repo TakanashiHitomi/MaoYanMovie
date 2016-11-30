@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        >
+
+    <TextView
+            android:id="@+id/item_movie_hot_name"
+            android:text="你的名字。"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_movie_hot_pic_all"
+            android:layout_marginStart="16dp"
+            />
+    <TextView
+            android:id="@+id/item_movie_hot_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_movie_hot_pic_all"
+            android:layout_below="@+id/item_movie_hot_name"
+            android:text="专业 6.5"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            />
+    <TextView
+            android:id="@+id/item_movie_hot_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_movie_hot_pic_all"
+            android:layout_marginStart="16dp"
+            android:layout_below="@+id/item_movie_hot_score"
+            android:layout_marginTop="6dp"
+            android:text="寻君千里行，心系君之名"
+            />
+    <TextView
+            android:id="@+id/item_movie_hot_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_movie_hot_pic_all"
+            android:layout_below="@id/item_movie_hot_desc"
+            android:layout_marginTop="6dp"
+            android:text="2016-12-02 本周五上映"
+            android:layout_marginStart="16dp"
+            />
+    <FrameLayout
+            android:id="@+id/item_movie_hot_pic_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            >
+
+        <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_movie_play"
+                />
+        <ImageView
+                android:id="@+id/item_movie_hot_pic"
+                android:layout_width="65dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"
+                />
+
+    </FrameLayout>
+
+    <Button
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/item_movie_hot_buy"
+            android:text="购买"
+            android:textSize="12sp"
+            />
+
+</RelativeLayout>

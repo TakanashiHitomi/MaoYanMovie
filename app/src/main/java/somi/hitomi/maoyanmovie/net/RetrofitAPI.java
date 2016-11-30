@@ -19,7 +19,7 @@ public class RetrofitAPI {
 
     public interface MovieListAPI {
         //"type=hot&offset=0&limit=1000"
-        @GET()
+        @GET("list.json")
         Call<MovieListBean> getMovieList(@Query("type") String type, @Query("offset") int offset, @Query("limit") int limit);
     }
 
