@@ -20,7 +20,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_margin="24dp"
-            android:id="@+id/button"
+            android:id="@+id/welcome_jump_button"
             android:text="跳过"
             android:textSize="18sp"
             android:textColor="@color/material_grey_400"
