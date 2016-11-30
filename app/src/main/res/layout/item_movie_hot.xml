@@ -16,15 +16,24 @@
             android:layout_marginStart="16dp"
             />
     <TextView
-            android:id="@+id/item_movie_hot_score"
+            android:id="@+id/item_movie_hot_wish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/item_movie_hot_pic_all"
             android:layout_below="@+id/item_movie_hot_name"
-            android:text="专业 6.5"
-            android:textSize="14sp"
+            android:text="2000"
+            android:textSize="16sp"
+            android:textColor="@color/material_amber_500"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
+            />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_movie_hot_wish"
+            android:text="人想看"
+            android:layout_alignBaseline="@+id/item_movie_hot_wish"
+            android:textSize="14sp"
             />
     <TextView
             android:id="@+id/item_movie_hot_desc"
@@ -32,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/item_movie_hot_pic_all"
             android:layout_marginStart="16dp"
-            android:layout_below="@+id/item_movie_hot_score"
+            android:layout_below="@+id/item_movie_hot_wish"
             android:layout_marginTop="6dp"
             android:text="寻君千里行，心系君之名"
             />
@@ -55,16 +64,16 @@
             >
 
         <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_movie_play"
-                />
-        <ImageView
                 android:id="@+id/item_movie_hot_pic"
                 android:layout_width="65dp"
                 android:layout_height="100dp"
                 android:src="@mipmap/ic_launcher"
+                />
+        <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_movie_play"
                 />
 
     </FrameLayout>

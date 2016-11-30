@@ -1,6 +1,7 @@
 package somi.hitomi.maoyanmovie.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,10 +40,24 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<HotMovieListViewHo
         holder.mItemMovieHotName.setText(movie.getNm());
         holder.mItemMovieHotDesc.setText(movie.getScm());
         holder.mItemMovieHotShow.setText(movie.getShowInfo());
+        holder.mItemMovieHotWish.setText(movie.getWish() + "");
         Glide.with(context)
                 .load(movie.getImg())
                 .fitCenter()
                 .into(holder.mItemMovieHotPic);
+        if (movie.getPreSale() == 1) {
+            holder.mItemMovieHotBuy.setText("预售");
+        } else {
+            holder.mItemMovieHotBuy.setText("购买");
+        }
+        if (movie.isValue3d()) {
+            Drawable drawable;
+            drawable = context.getDrawable(R.drawable.ic_3d);
+            if (movie.isImax()) {
+                drawable = context.getDrawable(R.drawable.ic_imax_3d);
+            }
+            holder.mItemMovieHotName.setCompoundDrawables(null, null, drawable, null);
+        }
     }
 
 

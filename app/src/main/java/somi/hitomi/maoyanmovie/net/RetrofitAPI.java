@@ -7,6 +7,7 @@ import somi.hitomi.maoyanmovie.domain.MainInfoBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 
 /**
+ * API for Retrofit
  * Created by HitomiT on 2016/11/30.
  */
 
@@ -20,7 +21,10 @@ public class RetrofitAPI {
     public interface MovieListAPI {
         //"type=hot&offset=0&limit=1000"
         @GET("list.json")
-        Call<MovieListBean> getMovieList(@Query("type") String type, @Query("offset") int offset, @Query("limit") int limit);
+        Call<MovieListBean> getMovieList(
+                @Query("type") String type,
+                @Query("offset") int offset,
+                @Query("limit") int limit);
     }
 
 }
