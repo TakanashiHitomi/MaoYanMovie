@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.ViewHolder;
+package somi.hitomi.maoyanmovie.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

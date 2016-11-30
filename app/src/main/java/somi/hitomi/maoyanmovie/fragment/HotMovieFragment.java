@@ -23,6 +23,7 @@ import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
 import somi.hitomi.maoyanmovie.adapter.HotMovieListAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
+import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
 import somi.hitomi.maoyanmovie.utils.Constant;
@@ -32,10 +33,17 @@ import somi.hitomi.maoyanmovie.utils.Constant;
  */
 
 public class HotMovieFragment extends BaseFragment {
+    private static final int LIST_DATA = (2 << 5) + 3;
+    private static final int BANNER_DATA = (2 << 5) + 4;
+
     @BindView(R.id.movie_hot_list)
     RecyclerView mMovieHotList;
     private List<MovieListBean.DataBean.MoviesBean> movies;
     private MainActivity mActivity;
+    private List<HotMovieBannerBean.DataBean> data;
+
+    private boolean isBannerExist = false;
+    private boolean isListExist = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,8 +71,7 @@ public class HotMovieFragment extends BaseFragment {
                     @Override
                     public void onResponse(Call<MovieListBean> call, Response<MovieListBean> response) {
                         movies = response.body().getData().getMovies();
-                        Logger.i(movies.get(0).toString());
-                        setAdapter();
+                        setAdapter(LIST_DATA);
                     }
 
                     @Override
@@ -72,11 +79,39 @@ public class HotMovieFragment extends BaseFragment {
                         Logger.e(t.getMessage());
                     }
                 });
+
+        new Retrofit.Builder()
+                .baseUrl(Constant.BANNER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(RetrofitAPI.HotMovieBanner.class)
+                .getHotMovieBanner()
+                .enqueue(new Callback<HotMovieBannerBean>() {
+                    @Override
+                    public void onResponse(Call<HotMovieBannerBean> call, Response<HotMovieBannerBean> response) {
+                        data = response.body().getData();
+                        setAdapter(BANNER_DATA);
+                    }
+
+                    @Override
+                    public void onFailure(Call<HotMovieBannerBean> call, Throwable t) {
+
+                    }
+                });
+
     }
 
-    private void setAdapter() {
-        mMovieHotList.setLayoutManager(new LinearLayoutManager(mActivity));
+    private void setAdapter(int listData) {
+        if (listData == BANNER_DATA) {
+            isBannerExist = true;
+        }
+        if (listData == LIST_DATA) {
+            isListExist = true;
+        }
+        if (isBannerExist && isListExist) {
+            mMovieHotList.setLayoutManager(new LinearLayoutManager(mActivity));
 
-        mMovieHotList.setAdapter(new HotMovieListAdapter(mActivity, movies));
+            mMovieHotList.setAdapter(new HotMovieListAdapter(mActivity, movies, data));
+        }
     }
 }
