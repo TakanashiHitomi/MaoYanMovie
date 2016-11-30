@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_welcome"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/welcome_container"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="somi.hitomi.maoyanmovie.WelcomeActivity"
         >
 
-    <ImageView
-            android:id="@+id/welcome_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/welcome_center"
-            android:layout_above="@+id/welcome_bottom"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="18dp"
-            />
-
-    <ImageView
-            android:id="@+id/welcome_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/welcome_bottom"
-            android:layout_marginBottom="38dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            />
-
-</RelativeLayout>
+</FrameLayout>

@@ -1,13 +1,15 @@
-package somi.hitomi.maoyanmovie;
+package somi.hitomi.maoyanmovie.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class WelcomeActivity extends AppCompatActivity {
+import somi.hitomi.maoyanmovie.R;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_main);
     }
 }
