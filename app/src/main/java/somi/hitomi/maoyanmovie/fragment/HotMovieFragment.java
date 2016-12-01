@@ -84,18 +84,19 @@ public class HotMovieFragment extends BaseFragment {
                 .baseUrl(Constant.BANNER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(RetrofitAPI.HotMovieBanner.class)
+                .create(RetrofitAPI.HotMovieBannerAPI.class)
                 .getHotMovieBanner()
                 .enqueue(new Callback<HotMovieBannerBean>() {
                     @Override
                     public void onResponse(Call<HotMovieBannerBean> call, Response<HotMovieBannerBean> response) {
                         data = response.body().getData();
+                        Logger.i(response.body().toString());
                         setAdapter(BANNER_DATA);
                     }
 
                     @Override
                     public void onFailure(Call<HotMovieBannerBean> call, Throwable t) {
-
+                        Logger.e(t.getMessage());
                     }
                 });
 

@@ -70,7 +70,7 @@ public class MovieFragment extends BaseFragment {
             }
         };
         adapter.addFragment(HotMovieFragment.class, "热映");
-        adapter.addFragment(WaittingMovieFragment.class, "待映");
+        adapter.addFragment(ComingMovieFragment.class, "待映");
         adapter.addFragment(FindMovieFragment.class, "搜片");
 
         return adapter;

@@ -4,5 +4,4 @@
         android:id="@+id/movie_hot_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/movie_title"
         />
