@@ -15,6 +15,7 @@ import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
+import somi.hitomi.maoyanmovie.utils.DateUtils;
 import somi.hitomi.maoyanmovie.viewholder.ComingMovieViewHolder;
 
 /**
@@ -85,21 +86,22 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
         // sticky header
+        String firstShowDate = DateUtils.number2Char(coming.getRt());
         if (position == 0) {
             viewHolder.mTvFirstShowTime.setVisibility(View.VISIBLE);
-            viewHolder.mTvFirstShowTime.setText(coming.getRt());
+            viewHolder.mTvFirstShowTime.setText(firstShowDate);
             viewHolder.itemView.setTag(FIRST_STICKY_VIEW);
         } else {
-            if (!TextUtils.equals(coming.getRt(), comingBeanList.get(position - 1).getRt())) {
+            if (!TextUtils.equals(firstShowDate, DateUtils.number2Char(comingBeanList.get(position - 1).getRt()))) {
                 viewHolder.mTvFirstShowTime.setVisibility(View.VISIBLE);
-                viewHolder.mTvFirstShowTime.setText(coming.getRt());
+                viewHolder.mTvFirstShowTime.setText(firstShowDate);
                 viewHolder.itemView.setTag(HAS_STICKY_VIEW);
             } else {
                 viewHolder.mTvFirstShowTime.setVisibility(View.GONE);
                 viewHolder.itemView.setTag(NONE_STICKY_VIEW);
             }
         }
-        viewHolder.itemView.setContentDescription(coming.getRt());
+        viewHolder.itemView.setContentDescription(firstShowDate);
     }
 
     @Override
