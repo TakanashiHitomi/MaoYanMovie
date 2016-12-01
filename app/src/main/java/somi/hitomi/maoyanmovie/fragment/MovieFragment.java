@@ -1,5 +1,6 @@
 package somi.hitomi.maoyanmovie.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -7,20 +8,20 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import somi.hitomi.maoyanmovie.R;
+import somi.hitomi.maoyanmovie.activity.CityPickerActivity;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
 import somi.hitomi.maoyanmovie.adapter.ViewPagerAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
-import somi.hitomi.maoyanmovie.domain.MovieListBean;
+
+import static android.app.Activity.RESULT_OK;
+import static somi.hitomi.maoyanmovie.activity.CityPickerActivity.KEY_PICKED_CITY;
 
 /**
  * Movie Fragment
@@ -34,9 +35,6 @@ public class MovieFragment extends BaseFragment {
     AppCompatButton mTitleCity;
     @BindView(R.id.hot_movie_pager)
     ViewPager mHotMoviePager;
-    //    @BindView(R.id.movie_hot_list)
-//    RecyclerView mMovieHotList;
-    private List<MovieListBean.DataBean.MoviesBean> movies;
     private MainActivity mActivity;
 
     @Nullable
@@ -56,7 +54,7 @@ public class MovieFragment extends BaseFragment {
 
     @OnClick(R.id.title_city)
     void onTitleCityClick() {
-        Toast.makeText(getActivity(), "Title City Button Click", Toast.LENGTH_SHORT).show();
+        startActivityForResult(new Intent(mActivity, CityPickerActivity.class), 1);
     }
 
     @Override
@@ -76,5 +74,13 @@ public class MovieFragment extends BaseFragment {
         adapter.addFragment(FindMovieFragment.class, "搜片");
 
         return adapter;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            String city = data.getStringExtra(KEY_PICKED_CITY);
+            mTitleCity.setText(city);
+        }
     }
 }

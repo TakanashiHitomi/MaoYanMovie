@@ -86,7 +86,7 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         //设置自动轮播，默认为true
         mHotMovieBanner.isAutoPlay(true);
         //设置轮播时间
-        mHotMovieBanner.setDelayTime(1500);
+        mHotMovieBanner.setDelayTime(2500);
         mHotMovieBanner.start();
     }
 

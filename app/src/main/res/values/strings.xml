@@ -4,5 +4,12 @@
     <string name="theater">Theater</string>
     <string name="discover">Discover</string>
     <string name="user">User</string>
+    <string name="hint_search_box">Input city name or pinyin</string>
+    <string name="hot_city">Hot City</string>
+    <string name="located_city">Locate city</string>
+    <string name="located_failed">Locate Failed</string>
+    <string name="locating">Locating…</string>
+    <string name="nothing_found">Nothing…</string>
+    <string name="select_city">Select City</string>
 
 </resources>
