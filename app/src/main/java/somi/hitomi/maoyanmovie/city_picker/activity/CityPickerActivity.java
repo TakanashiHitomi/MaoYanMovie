@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.activity;
+package somi.hitomi.maoyanmovie.city_picker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,13 +23,13 @@ import com.amap.api.location.AMapLocationListener;
 import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
-import somi.hitomi.maoyanmovie.adapter.CityListAdapter;
-import somi.hitomi.maoyanmovie.adapter.ResultListAdapter;
-import somi.hitomi.maoyanmovie.db.DBManager;
-import somi.hitomi.maoyanmovie.domain.City;
-import somi.hitomi.maoyanmovie.domain.LocateState;
-import somi.hitomi.maoyanmovie.ui.SideLetterBar;
-import somi.hitomi.maoyanmovie.utils.StringUtils;
+import somi.hitomi.maoyanmovie.city_picker.adapter.CityListAdapter;
+import somi.hitomi.maoyanmovie.city_picker.adapter.ResultListAdapter;
+import somi.hitomi.maoyanmovie.city_picker.db.DBManager;
+import somi.hitomi.maoyanmovie.city_picker.domain.City;
+import somi.hitomi.maoyanmovie.city_picker.domain.LocateState;
+import somi.hitomi.maoyanmovie.city_picker.ui.SideLetterBar;
+import somi.hitomi.maoyanmovie.city_picker.utils.StringUtils;
 
 /**
  * author zaaach on 2016/1/26.

@@ -15,13 +15,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import somi.hitomi.maoyanmovie.R;
-import somi.hitomi.maoyanmovie.activity.CityPickerActivity;
+import somi.hitomi.maoyanmovie.city_picker.activity.CityPickerActivity;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
 import somi.hitomi.maoyanmovie.adapter.ViewPagerAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 
 import static android.app.Activity.RESULT_OK;
-import static somi.hitomi.maoyanmovie.activity.CityPickerActivity.KEY_PICKED_CITY;
+import static somi.hitomi.maoyanmovie.city_picker.activity.CityPickerActivity.KEY_PICKED_CITY;
 
 /**
  * Movie Fragment

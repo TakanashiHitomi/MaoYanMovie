@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.adapter;
+package somi.hitomi.maoyanmovie.city_picker.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
-import somi.hitomi.maoyanmovie.domain.City;
-import somi.hitomi.maoyanmovie.domain.LocateState;
-import somi.hitomi.maoyanmovie.ui.WrapHeightGridView;
-import somi.hitomi.maoyanmovie.utils.PinyinUtils;
+import somi.hitomi.maoyanmovie.city_picker.domain.City;
+import somi.hitomi.maoyanmovie.city_picker.domain.LocateState;
+import somi.hitomi.maoyanmovie.city_picker.ui.WrapHeightGridView;
+import somi.hitomi.maoyanmovie.city_picker.utils.PinyinUtils;
 
 /**
  * author zaaach on 2016/1/26.

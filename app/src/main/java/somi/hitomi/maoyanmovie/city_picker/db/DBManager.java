@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.db;
+package somi.hitomi.maoyanmovie.city_picker.db;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import somi.hitomi.maoyanmovie.domain.City;
+import somi.hitomi.maoyanmovie.city_picker.domain.City;
 
 /**
  * author zaaach on 2016/1/26.

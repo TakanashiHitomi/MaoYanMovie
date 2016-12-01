@@ -13,7 +13,7 @@
             android:text="@string/hot_city"
             />
 
-    <somi.hitomi.maoyanmovie.ui.WrapHeightGridView
+    <somi.hitomi.maoyanmovie.city_picker.ui.WrapHeightGridView
             android:id="@+id/gridview_hot_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

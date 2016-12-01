@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.adapter;
+package somi.hitomi.maoyanmovie.city_picker.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
-import somi.hitomi.maoyanmovie.domain.City;
+import somi.hitomi.maoyanmovie.city_picker.domain.City;
 
 /**
  * author zaaach on 2016/1/26.

@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.ui;
+package somi.hitomi.maoyanmovie.city_picker.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

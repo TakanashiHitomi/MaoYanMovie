@@ -40,7 +40,7 @@
                 android:visibility="gone"
                 />
 
-        <somi.hitomi.maoyanmovie.ui.SideLetterBar
+        <somi.hitomi.maoyanmovie.city_picker.ui.SideLetterBar
                 android:id="@+id/side_letter_bar"
                 android:layout_width="@dimen/side_letter_bar_width"
                 android:layout_height="match_parent"

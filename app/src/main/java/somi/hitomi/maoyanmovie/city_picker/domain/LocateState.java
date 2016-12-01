@@ -1,4 +1,4 @@
-package somi.hitomi.maoyanmovie.domain;
+package somi.hitomi.maoyanmovie.city_picker.domain;
 
 /**
  * author zaaach on 2016/1/26.
