@@ -60,6 +60,12 @@ public class HotMovieFragment extends BaseFragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
     protected void getDataFromNet() {
         new Retrofit.Builder()
                 .baseUrl(BaseURL.BASE_MOVIE_LIST_URL)
@@ -99,7 +105,6 @@ public class HotMovieFragment extends BaseFragment {
                         Logger.e(t.getMessage());
                     }
                 });
-
     }
 
     private void setAdapter(int listData) {

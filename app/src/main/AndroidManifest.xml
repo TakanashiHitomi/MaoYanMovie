@@ -5,13 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-
 
     <application
             android:name=".App"
@@ -21,7 +19,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activity.MainActivity">
-
         </activity>
         <activity
                 android:name=".welcome.activity.WelcomeActivity"
@@ -32,19 +29,21 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
                 android:name=".city_picker.activity.CityPickerActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
 
-        <!--高德地图定位-->
+        <!-- 高德地图定位 -->
         <service android:name="com.amap.api.location.APSService"/>
+
         <meta-data
                 android:name="com.amap.api.v2.apikey"
                 android:value="07e4e3deba98311f4e9749f8170a9166"/>
-        <!--高德地图定位结束-->
+        <!-- 高德地图定位结束 -->
+        <activity android:name=".activity.MovieContentActivity">
+        </activity>
     </application>
 
 </manifest>

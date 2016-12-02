@@ -1,8 +1,10 @@
 package somi.hitomi.maoyanmovie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
+import somi.hitomi.maoyanmovie.activity.MovieContentActivity;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 import somi.hitomi.maoyanmovie.utils.DensityUtils;
@@ -92,7 +95,7 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void bindNormalView(HotMovieListViewHolder holder, int position) {
-        MovieListBean.DataBean.HotBean movie = movies.get(position);
+        final MovieListBean.DataBean.HotBean movie = movies.get(position);
         holder.mItemMovieHotName.setText(movie.getNm());
         holder.mItemMovieHotDesc.setText(movie.getScm());
         holder.mItemMovieHotShow.setText(movie.getShowInfo());
@@ -106,7 +109,14 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else {
             holder.mItemMovieHotBuy.setText("购买");
         }
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MovieContentActivity.class);
+                intent.putExtra("movieId", movie.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
 
