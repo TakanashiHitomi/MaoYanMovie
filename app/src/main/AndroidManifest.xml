@@ -22,7 +22,7 @@
         </activity>
         <activity
                 android:name=".welcome.activity.WelcomeActivity"
-                android:theme="@style/AppTranslucentStatusTheme">
+                android:theme="@style/AppTranslucentNavigationTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
