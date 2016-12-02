@@ -26,7 +26,7 @@ import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
-import somi.hitomi.maoyanmovie.utils.Constant;
+import somi.hitomi.maoyanmovie.utils.BaseURL;
 
 /**
  * Created by HitomiT on 2016/11/30.
@@ -62,7 +62,7 @@ public class HotMovieFragment extends BaseFragment {
     @Override
     protected void getDataFromNet() {
         new Retrofit.Builder()
-                .baseUrl(Constant.BASE_MOVIE_LIST_URL)
+                .baseUrl(BaseURL.BASE_MOVIE_LIST_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitAPI.MovieListAPI.class)
@@ -81,7 +81,7 @@ public class HotMovieFragment extends BaseFragment {
                 });
 
         new Retrofit.Builder()
-                .baseUrl(Constant.BANNER_URL)
+                .baseUrl(BaseURL.BANNER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitAPI.HotMovieBannerAPI.class)

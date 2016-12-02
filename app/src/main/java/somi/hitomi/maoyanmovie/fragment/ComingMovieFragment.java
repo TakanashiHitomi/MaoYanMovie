@@ -27,7 +27,7 @@ import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
 import somi.hitomi.maoyanmovie.listener.StickyHeaderListener;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
-import somi.hitomi.maoyanmovie.utils.Constant;
+import somi.hitomi.maoyanmovie.utils.BaseURL;
 
 /**
  * Created by HitomiT on 2016/11/30.
@@ -60,11 +60,11 @@ public class ComingMovieFragment extends BaseFragment {
     @Override
     protected void getDataFromNet() {
         new Retrofit.Builder()
-                .baseUrl(Constant.WAITING_MOVIE_LIST_URL)
+                .baseUrl(BaseURL.WAITING_MOVIE_LIST_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitAPI.WaitingMovieListAPI.class)
-                .getWaitingMovieList()
+                .getWaitingMovieList(0, 50)
                 .enqueue(new Callback<ComingMovieBean>() {
                     @Override
                     public void onResponse(Call<ComingMovieBean> call, Response<ComingMovieBean> response) {
@@ -75,7 +75,7 @@ public class ComingMovieFragment extends BaseFragment {
 
                     @Override
                     public void onFailure(Call<ComingMovieBean> call, Throwable t) {
-
+                        Logger.e(t.getMessage());
                     }
                 });
     }

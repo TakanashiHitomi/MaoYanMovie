@@ -18,7 +18,7 @@ import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.common.BaseActivity;
 import somi.hitomi.maoyanmovie.domain.MainInfoBean;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
-import somi.hitomi.maoyanmovie.utils.Constant;
+import somi.hitomi.maoyanmovie.utils.BaseURL;
 import somi.hitomi.maoyanmovie.welcome.fragment.WelcomeExtraFragment;
 import somi.hitomi.maoyanmovie.welcome.fragment.WelcomeMainFragment;
 
@@ -53,7 +53,7 @@ public class WelcomeActivity extends BaseActivity {
 
     private void loadExImage() {
         new Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(BaseURL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitAPI.WelcomeInfoAPI.class)

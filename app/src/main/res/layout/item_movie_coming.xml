@@ -7,7 +7,7 @@
 
     <include
             android:id="@+id/tv_first_show_time"
-            layout="@layout/view_first_show_time"
+            layout="@layout/view_sticky_header"
             />
 
 

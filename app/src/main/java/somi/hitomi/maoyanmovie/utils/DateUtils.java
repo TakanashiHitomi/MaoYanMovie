@@ -8,6 +8,9 @@ import android.text.TextUtils;
 
 public class DateUtils {
     public static String number2Char(String numberDate) {
+        if (numberDate == null) {
+            return "";
+        }
         String[] strings = numberDate.split("-");
         if (strings.length != 3) {
             throw new IllegalStateException("Input date error");
