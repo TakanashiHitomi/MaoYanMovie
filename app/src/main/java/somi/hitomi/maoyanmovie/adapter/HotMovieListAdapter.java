@@ -1,7 +1,6 @@
 package somi.hitomi.maoyanmovie.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -19,6 +18,8 @@ import java.util.List;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
+import somi.hitomi.maoyanmovie.utils.DensityUtils;
+import somi.hitomi.maoyanmovie.utils.ImageUrlDomainUtil;
 import somi.hitomi.maoyanmovie.viewholder.HotMovieBannerViewHolder;
 import somi.hitomi.maoyanmovie.viewholder.HotMovieListViewHolder;
 
@@ -31,9 +32,9 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int NORMAL = 1;
     private final List<HotMovieBannerBean.DataBean> data;
     private Context context;
-    private List<MovieListBean.DataBean.MoviesBean> movies;
+    private List<MovieListBean.DataBean.HotBean> movies;
 
-    public HotMovieListAdapter(Context context, List<MovieListBean.DataBean.MoviesBean> movies, List<HotMovieBannerBean.DataBean> data) {
+    public HotMovieListAdapter(Context context, List<MovieListBean.DataBean.HotBean> movies, List<HotMovieBannerBean.DataBean> data) {
         this.context = context;
         this.movies = movies;
         this.data = data;
@@ -91,13 +92,13 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void bindNormalView(HotMovieListViewHolder holder, int position) {
-        MovieListBean.DataBean.MoviesBean movie = movies.get(position);
+        MovieListBean.DataBean.HotBean movie = movies.get(position);
         holder.mItemMovieHotName.setText(movie.getNm());
         holder.mItemMovieHotDesc.setText(movie.getScm());
         holder.mItemMovieHotShow.setText(movie.getShowInfo());
         holder.mItemMovieHotWish.setText(movie.getWish() + "");
         Glide.with(context)
-                .load(movie.getImg())
+                .load(ImageUrlDomainUtil.getImageUrlDomain(movie.getImg(), DensityUtils.dp2px(63), DensityUtils.dp2px(93)))
                 .fitCenter()
                 .into(holder.mItemMovieHotPic);
         if (movie.getPreSale() == 1) {
@@ -105,14 +106,7 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else {
             holder.mItemMovieHotBuy.setText("购买");
         }
-        if (movie.isValue3d()) {
-            Drawable drawable;
-            drawable = context.getResources().getDrawable(R.drawable.ic_3d, null);
-            if (movie.isImax()) {
-                drawable = context.getResources().getDrawable(R.drawable.ic_imax_3d, null);
-            }
-            holder.mItemMovieHotName.setCompoundDrawables(null, null, drawable, null);
-        }
+
     }
 
 

@@ -38,7 +38,7 @@ public class HotMovieFragment extends BaseFragment {
 
     @BindView(R.id.movie_hot_list)
     RecyclerView mMovieHotList;
-    private List<MovieListBean.DataBean.MoviesBean> movies;
+    private List<MovieListBean.DataBean.HotBean> movies;
     private MainActivity mActivity;
     private List<HotMovieBannerBean.DataBean> data;
 
@@ -66,11 +66,11 @@ public class HotMovieFragment extends BaseFragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitAPI.MovieListAPI.class)
-                .getMovieList("hot", 0, 1000)
+                .getMovieList(0, 20)
                 .enqueue(new Callback<MovieListBean>() {
                     @Override
                     public void onResponse(Call<MovieListBean> call, Response<MovieListBean> response) {
-                        movies = response.body().getData().getMovies();
+                        movies = response.body().getData().getHot();
                         setAdapter(LIST_DATA);
                     }
 

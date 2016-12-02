@@ -13,7 +13,6 @@
             android:id="@+id/movie_coming_header_pre"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:scrollbars="horizontal"
             />
 
 
