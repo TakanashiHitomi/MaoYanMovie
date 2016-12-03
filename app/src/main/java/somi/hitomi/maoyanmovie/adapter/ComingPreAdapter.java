@@ -6,15 +6,20 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.logger.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
-import somi.hitomi.maoyanmovie.domain.ComingMoviePreHeaderDomain;
-import somi.hitomi.maoyanmovie.utils.DensityUtils;
-import somi.hitomi.maoyanmovie.utils.ImageUrlDomainUtil;
+import somi.hitomi.maoyanmovie.domain.ComingVideoPreBean;
+import somi.hitomi.maoyanmovie.net.RetrofitAPI;
+import somi.hitomi.maoyanmovie.utils.BaseURL;
 import somi.hitomi.maoyanmovie.viewholder.ComingPreListViewHolder;
 
 /**
@@ -23,28 +28,29 @@ import somi.hitomi.maoyanmovie.viewholder.ComingPreListViewHolder;
 public class ComingPreAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<ComingMovieBean.DataBean.ComingBean> comingBeanList;
-    private List<ComingMoviePreHeaderDomain> headerDomains;
+    //    private List<ComingMovieBean.DataBean.ComingBean> comingBeanList;
+    private List<ComingVideoPreBean.DataBean> preVideoData;
 
     public ComingPreAdapter(Context context, List<ComingMovieBean.DataBean.ComingBean> comingBeanList) {
         this.context = context;
-        this.comingBeanList = comingBeanList;
-        // over API24
-//        comingBeanList.sort(new Comparator<ComingMovieBean.DataBean.ComingBean>() {
-//            @Override
-//            public int compare(ComingMovieBean.DataBean.ComingBean comingBean, ComingMovieBean.DataBean.ComingBean t1) {
-//                return DateCompareUtil.compareDate(comingBean.getRt(), t1.getRt());
-//            }
-//        });
-        headerDomains = new ArrayList<>();
-        for (ComingMovieBean.DataBean.ComingBean comingBean : comingBeanList) {
-            String name = comingBean.getNm();
-            String imgUrl = comingBean.getImg();
-            String videoName = comingBean.getVideoName();
-            String videourl = comingBean.getVideourl();
+        new Retrofit.Builder()
+                .baseUrl(BaseURL.COMING_MOVIE_PRE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(RetrofitAPI.ComingVideoPreAPI.class)
+                .getComingVideoPre()
+                .enqueue(new Callback<ComingVideoPreBean>() {
+                    @Override
+                    public void onResponse(Call<ComingVideoPreBean> call, Response<ComingVideoPreBean> response) {
+                        preVideoData = response.body().getData();
+                        notifyDataSetChanged();
+                    }
 
-            headerDomains.add(new ComingMoviePreHeaderDomain(name, imgUrl, videoName, videourl));
-        }
+                    @Override
+                    public void onFailure(Call<ComingVideoPreBean> call, Throwable t) {
+                        Logger.e(t.getMessage());
+                    }
+                });
     }
 
     @Override
@@ -57,19 +63,22 @@ public class ComingPreAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ComingPreListViewHolder) {
-            ComingPreListViewHolder viewHolder = (ComingPreListViewHolder) holder;
-            ComingMoviePreHeaderDomain headerDomain = headerDomains.get(position);
-            viewHolder.mItemComingHeaderPreName.setText(headerDomain.getName());
-            viewHolder.mItemComingHeaderPreDesc.setText(headerDomain.getDesc());
-            Glide.with(context)
-                    .load(ImageUrlDomainUtil.getImageUrlDomain(headerDomain.getImgUrl(), DensityUtils.dp2px(180), DensityUtils.dp2px(180)))
-                    .centerCrop()
-                    .into(viewHolder.mItemComingHeaderPreImg);
+            bindPreView((ComingPreListViewHolder) holder, position);
         }
+    }
+
+    private void bindPreView(ComingPreListViewHolder viewHolder, int position) {
+        ComingVideoPreBean.DataBean data = preVideoData.get(position);
+        viewHolder.mItemComingHeaderPreName.setText(data.getMovieName());
+        viewHolder.mItemComingHeaderPreDesc.setText(data.getOriginName());
+        Glide.with(context)
+                .load(data.getImg())
+                .fitCenter()
+                .into(viewHolder.mItemComingHeaderPreImg);
     }
 
     @Override
     public int getItemCount() {
-        return headerDomains == null ? 0 : headerDomains.size();
+        return preVideoData == null ? 0 : preVideoData.size();
     }
 }

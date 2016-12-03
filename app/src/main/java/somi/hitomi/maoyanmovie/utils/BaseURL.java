@@ -12,4 +12,5 @@ public class BaseURL {
     public static final String WAITING_MOVIE_LIST_URL = "http://api.maoyan.com/mmdb/movie/v1/list/wish/order/";
     //    public static final String MOVIE_LIST_URL = BASE_MOVIE_LIST_URL + "?type=hot&offset=0&limit=1000";
     public static final String MOVIE_CONTENT_URL = "http://m.maoyan.com/movie/";
+    public static final String COMING_MOVIE_PRE_URL = "http://api.maoyan.com/mmdb/movie/lp/";
 }

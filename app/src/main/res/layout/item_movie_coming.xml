@@ -86,7 +86,7 @@
                     android:id="@+id/item_movie_coming_pic"
                     android:layout_width="65dp"
                     android:layout_height="100dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:background="#eaeaea"
                     />
             <ImageView
                     android:layout_gravity="center"

@@ -6,6 +6,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBeanOld;
+import somi.hitomi.maoyanmovie.domain.ComingVideoPreBean;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MainInfoBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
@@ -61,4 +62,10 @@ public class RetrofitAPI {
         @GET("{@movieId}")
         Call<String> getMovieContent(@Path("movieId") String movieId);
     }
+
+    public interface ComingVideoPreAPI {
+        @GET("list.json")
+        Call<ComingVideoPreBean> getComingVideoPre();
+    }
+
 }
