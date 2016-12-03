@@ -11,5 +11,10 @@
     <string name="locating">Locating…</string>
     <string name="nothing_found">Nothing…</string>
     <string name="select_city">Select City</string>
+    <string name="progressActivityEmptyContentPlaceholder">No data, click to retry</string>
+    <string name="progressActivityEmptyTitlePlaceholder">No data</string>
+    <string name="progressActivityErrorContentPlaceholder">Cannot connect to Internet,Please check your network</string>
+    <string name="progressActivityErrorTitlePlaceholder">Connect to Internet failed</string>
+    <string name="progressActivityErrorButton">Retry</string>
 
 </resources>

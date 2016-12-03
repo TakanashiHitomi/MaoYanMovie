@@ -22,6 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
+import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 import somi.hitomi.maoyanmovie.adapter.ComingMovieAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
@@ -41,6 +42,7 @@ public class ComingMovieFragment extends BaseFragment {
     TextView mViewStickyHeader;
 
     private MainActivity mActivity;
+    private LoadingStateFrameLayout mainContainer;
     private List<ComingMovieBean.DataBean.ComingBean> mComingList;
 
     @Override
@@ -55,6 +57,13 @@ public class ComingMovieFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_coming_movie, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mainContainer = mActivity.getMainContainer();
+        mainContainer.showLoading();
     }
 
     @Override
@@ -76,6 +85,7 @@ public class ComingMovieFragment extends BaseFragment {
                     @Override
                     public void onFailure(Call<ComingMovieBean> call, Throwable t) {
                         Logger.e(t.getMessage());
+                        showError();
                     }
                 });
     }
@@ -85,4 +95,25 @@ public class ComingMovieFragment extends BaseFragment {
         mMovieWaitingList.setAdapter(new ComingMovieAdapter(mActivity, mComingList));
         mMovieWaitingList.addOnScrollListener(new StickyHeaderListener(mViewStickyHeader));
     }
+
+    /**
+     * 错误页面显示
+     * 太长所以拿出来了
+     */
+    private void showError() {
+        mainContainer.showError(
+                mActivity.getDrawable(R.drawable.error_internet_image),
+                getString(R.string.progressActivityEmptyTitlePlaceholder),
+                getString(R.string.progressActivityEmptyContentPlaceholder),
+                getString(R.string.progressActivityErrorButton),
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getDataFromNet();
+                        mainContainer.showLoading();
+                    }
+                }
+        );
+    }
+
 }

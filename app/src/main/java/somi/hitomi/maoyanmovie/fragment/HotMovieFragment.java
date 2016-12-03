@@ -21,6 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
+import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 import somi.hitomi.maoyanmovie.adapter.HotMovieListAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
@@ -33,17 +34,17 @@ import somi.hitomi.maoyanmovie.utils.BaseURL;
  */
 
 public class HotMovieFragment extends BaseFragment {
-    private static final int LIST_DATA = (2 << 5) + 3;
-    private static final int BANNER_DATA = (2 << 5) + 4;
 
     @BindView(R.id.movie_hot_list)
     RecyclerView mMovieHotList;
+
     private List<MovieListBean.DataBean.HotBean> movies;
     private MainActivity mActivity;
     private List<HotMovieBannerBean.DataBean> bannerData;
 
     private boolean isBannerExist = false;
     private HotMovieListAdapter hotMovieListAdapter;
+    private LoadingStateFrameLayout mainContainer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +63,8 @@ public class HotMovieFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mainContainer = mActivity.getMainContainer();
+        mainContainer.showLoading();
     }
 
     @Override
@@ -82,6 +85,7 @@ public class HotMovieFragment extends BaseFragment {
                     @Override
                     public void onFailure(Call<MovieListBean> call, Throwable t) {
                         Logger.e(t.getMessage());
+                        showError();
                     }
                 });
 
@@ -106,6 +110,26 @@ public class HotMovieFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * 错误页面显示
+     * 太长所以拿出来了
+     */
+    private void showError() {
+        mainContainer.showError(
+                mActivity.getDrawable(R.drawable.error_internet_image),
+                getString(R.string.progressActivityEmptyTitlePlaceholder),
+                getString(R.string.progressActivityEmptyContentPlaceholder),
+                getString(R.string.progressActivityErrorButton),
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getDataFromNet();
+                        mainContainer.showLoading();
+                    }
+                }
+        );
+    }
+
     private void setAdapter(boolean isBannerData) {
         if (hotMovieListAdapter == null) {
             if (isBannerData) {
@@ -114,10 +138,12 @@ public class HotMovieFragment extends BaseFragment {
                 initAdapter();
                 if (isBannerExist) {
                     hotMovieListAdapter.setBanner(bannerData);
+                    mainContainer.showContent();
                 }
             }
         } else {
             hotMovieListAdapter.setBanner(bannerData);
+            mainContainer.showContent();
         }
     }
 

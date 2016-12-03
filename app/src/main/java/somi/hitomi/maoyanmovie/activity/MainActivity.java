@@ -6,7 +6,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.SparseArray;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
@@ -23,13 +22,14 @@ import somi.hitomi.maoyanmovie.fragment.DiscoverFragment;
 import somi.hitomi.maoyanmovie.fragment.MovieFragment;
 import somi.hitomi.maoyanmovie.fragment.TheaterFragment;
 import somi.hitomi.maoyanmovie.fragment.UserFragment;
+import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.main_container)
-    FrameLayout mMainContainer;
     @BindView(R.id.main_bottom_bar)
     BottomBar mMainBottomBar;
+    @BindView(R.id.main_container)
+    LoadingStateFrameLayout mMainContainer;
 
     private SparseArray<BaseFragment> fragments;
     private int currentTabId;
@@ -97,5 +97,9 @@ public class MainActivity extends BaseActivity {
         }
 
         transaction.commit();
+    }
+
+    public LoadingStateFrameLayout getMainContainer() {
+        return mMainContainer;
     }
 }
