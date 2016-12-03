@@ -33,14 +33,18 @@ import somi.hitomi.maoyanmovie.viewholder.HotMovieListViewHolder;
 public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int BANNER = 0;
     private static final int NORMAL = 1;
-    private final List<HotMovieBannerBean.DataBean> data;
     private Context context;
     private List<MovieListBean.DataBean.HotBean> movies;
+    private List<HotMovieBannerBean.DataBean> bannerData;
 
-    public HotMovieListAdapter(Context context, List<MovieListBean.DataBean.HotBean> movies, List<HotMovieBannerBean.DataBean> data) {
+    public HotMovieListAdapter(Context context, List<MovieListBean.DataBean.HotBean> movies) {
         this.context = context;
         this.movies = movies;
-        this.data = data;
+    }
+
+    public void setBanner(List<HotMovieBannerBean.DataBean> bannerData) {
+        this.bannerData = bannerData;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -68,11 +72,11 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void bindBannerView(HotMovieBannerViewHolder holder) {
         Banner mHotMovieBanner = holder.mHotMovieBanner;
-        mHotMovieBanner.setOffscreenPageLimit(data.size());
+        mHotMovieBanner.setOffscreenPageLimit(bannerData.size());
         mHotMovieBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         // 初始化图片集合
         ArrayList<String> imageUrls = new ArrayList<>();
-        for (HotMovieBannerBean.DataBean dataBean : data) {
+        for (HotMovieBannerBean.DataBean dataBean : bannerData) {
             imageUrls.add(dataBean.getImgUrl());
         }
         mHotMovieBanner.setBannerAnimation(Transformer.Accordion);

@@ -40,10 +40,10 @@ public class HotMovieFragment extends BaseFragment {
     RecyclerView mMovieHotList;
     private List<MovieListBean.DataBean.HotBean> movies;
     private MainActivity mActivity;
-    private List<HotMovieBannerBean.DataBean> data;
+    private List<HotMovieBannerBean.DataBean> bannerData;
 
     private boolean isBannerExist = false;
-    private boolean isListExist = false;
+    private HotMovieListAdapter hotMovieListAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +62,6 @@ public class HotMovieFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override
@@ -77,7 +76,7 @@ public class HotMovieFragment extends BaseFragment {
                     @Override
                     public void onResponse(Call<MovieListBean> call, Response<MovieListBean> response) {
                         movies = response.body().getData().getHot();
-                        setAdapter(LIST_DATA);
+                        setAdapter(false);
                     }
 
                     @Override
@@ -95,9 +94,9 @@ public class HotMovieFragment extends BaseFragment {
                 .enqueue(new Callback<HotMovieBannerBean>() {
                     @Override
                     public void onResponse(Call<HotMovieBannerBean> call, Response<HotMovieBannerBean> response) {
-                        data = response.body().getData();
+                        bannerData = response.body().getData();
                         Logger.i(response.body().toString());
-                        setAdapter(BANNER_DATA);
+                        setAdapter(true);
                     }
 
                     @Override
@@ -107,17 +106,24 @@ public class HotMovieFragment extends BaseFragment {
                 });
     }
 
-    private void setAdapter(int listData) {
-        if (listData == BANNER_DATA) {
-            isBannerExist = true;
+    private void setAdapter(boolean isBannerData) {
+        if (hotMovieListAdapter == null) {
+            if (isBannerData) {
+                isBannerExist = true;
+            } else {
+                initAdapter();
+                if (isBannerExist) {
+                    hotMovieListAdapter.setBanner(bannerData);
+                }
+            }
+        } else {
+            hotMovieListAdapter.setBanner(bannerData);
         }
-        if (listData == LIST_DATA) {
-            isListExist = true;
-        }
-        if (isBannerExist && isListExist) {
-            mMovieHotList.setLayoutManager(new LinearLayoutManager(mActivity));
+    }
 
-            mMovieHotList.setAdapter(new HotMovieListAdapter(mActivity, movies, data));
-        }
+    private void initAdapter() {
+        mMovieHotList.setLayoutManager(new LinearLayoutManager(mActivity));
+        hotMovieListAdapter = new HotMovieListAdapter(mActivity, movies);
+        mMovieHotList.setAdapter(hotMovieListAdapter);
     }
 }
