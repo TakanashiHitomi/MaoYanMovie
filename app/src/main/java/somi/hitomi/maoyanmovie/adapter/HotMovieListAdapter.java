@@ -71,6 +71,9 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void bindBannerView(HotMovieBannerViewHolder holder) {
+        if (bannerData == null) {
+            return;
+        }
         Banner mHotMovieBanner = holder.mHotMovieBanner;
         mHotMovieBanner.setOffscreenPageLimit(bannerData.size());
         mHotMovieBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);

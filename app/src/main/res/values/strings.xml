@@ -16,5 +16,6 @@
     <string name="progressActivityErrorContentPlaceholder">Cannot connect to Internet,Please check your network</string>
     <string name="progressActivityErrorTitlePlaceholder">Connect to Internet failed</string>
     <string name="progressActivityErrorButton">Retry</string>
+    <string name="loading">Loading…</string>
 
 </resources>

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
@@ -21,22 +22,26 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
-import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 import somi.hitomi.maoyanmovie.adapter.HotMovieListAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
 import somi.hitomi.maoyanmovie.utils.BaseURL;
+import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
+import somi.hitomi.maoyanmovie.widget.RotationHeader;
+import somi.hitomi.maoyanmovie.widget.SwipeRefreshLayout;
 
 /**
  * Created by HitomiT on 2016/11/30.
  */
 
-public class HotMovieFragment extends BaseFragment {
+public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout.OnFreshListener {
 
     @BindView(R.id.movie_hot_list)
     RecyclerView mMovieHotList;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private List<MovieListBean.DataBean.HotBean> movies;
     private MainActivity mActivity;
@@ -65,6 +70,9 @@ public class HotMovieFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mainContainer = mActivity.getMainContainer();
         mainContainer.showLoading();
+        // 设置下拉刷新监听器
+        mSwipeRefreshLayout.setListener(this);
+        mSwipeRefreshLayout.setHeader(new RotationHeader(mActivity));
     }
 
     @Override
@@ -139,11 +147,13 @@ public class HotMovieFragment extends BaseFragment {
                 if (isBannerExist) {
                     hotMovieListAdapter.setBanner(bannerData);
                     mainContainer.showContent();
+                    mSwipeRefreshLayout.onFinishFreshAndLoad();
                 }
             }
         } else {
             hotMovieListAdapter.setBanner(bannerData);
             mainContainer.showContent();
+            mSwipeRefreshLayout.onFinishFreshAndLoad();
         }
     }
 
@@ -151,5 +161,15 @@ public class HotMovieFragment extends BaseFragment {
         mMovieHotList.setLayoutManager(new LinearLayoutManager(mActivity));
         hotMovieListAdapter = new HotMovieListAdapter(mActivity, movies);
         mMovieHotList.setAdapter(hotMovieListAdapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        getDataFromNet();
+    }
+
+    @Override
+    public void onLoadMore() {
+        Toast.makeText(mActivity, "加载更多 > <", Toast.LENGTH_SHORT).show();
     }
 }
