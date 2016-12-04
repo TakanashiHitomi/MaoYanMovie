@@ -19,12 +19,14 @@ import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MovieContentActivity;
+import somi.hitomi.maoyanmovie.activity.SearchActivity;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
 import somi.hitomi.maoyanmovie.utils.DensityUtils;
 import somi.hitomi.maoyanmovie.utils.ImageUrlDomainUtil;
 import somi.hitomi.maoyanmovie.viewholder.HotMovieBannerViewHolder;
 import somi.hitomi.maoyanmovie.viewholder.HotMovieListViewHolder;
+import somi.hitomi.maoyanmovie.viewholder.SearchTitleViewHolder;
 
 /**
  * Created by HitomiT on 2016/11/30.
@@ -33,6 +35,7 @@ import somi.hitomi.maoyanmovie.viewholder.HotMovieListViewHolder;
 public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int BANNER = 0;
     private static final int NORMAL = 1;
+    private static final int SEARCH_TITLE = 2;
     private Context context;
     private List<MovieListBean.DataBean.HotBean> movies;
     private List<HotMovieBannerBean.DataBean> bannerData;
@@ -53,9 +56,13 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return new HotMovieListViewHolder(
                     LayoutInflater.from(context).inflate(R.layout.item_movie_hot, parent, false)
             );
-        } else {
+        } else if (viewType == BANNER) {
             return new HotMovieBannerViewHolder(
                     LayoutInflater.from(context).inflate(R.layout.banner_movie_hot, parent, false)
+            );
+        } else {
+            return new SearchTitleViewHolder(
+                    LayoutInflater.from(context).inflate(R.layout.view_search_title, parent, false)
             );
         }
     }
@@ -63,11 +70,23 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == NORMAL) {
-            // 此处减1了，下面的方法中就不需要减了
-            bindNormalView((HotMovieListViewHolder) holder, position - 1);
+            // 此处减2了，下面的方法中就不需要减了
+            // 额外减去搜索框
+            bindNormalView((HotMovieListViewHolder) holder, position - 2);
         } else if (getItemViewType(position) == BANNER) {
             bindBannerView((HotMovieBannerViewHolder) holder);
+        } else if (getItemViewType(position) == SEARCH_TITLE) {
+            bindSearchView((SearchTitleViewHolder) holder);
         }
+    }
+
+    private void bindSearchView(SearchTitleViewHolder holder) {
+        holder.mSearchTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, SearchActivity.class));
+            }
+        });
     }
 
     private void bindBannerView(HotMovieBannerViewHolder holder) {
@@ -129,11 +148,16 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return movies == null ? 0 : movies.size() + 1;
+        return movies == null ? 0 : movies.size() + 2;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? BANNER : NORMAL;
+//        return position == 0 ? BANNER : NORMAL;
+        if (position == 0) {
+            return SEARCH_TITLE;
+        } else if (position == 1) {
+            return BANNER;
+        } else return NORMAL;
     }
 }

@@ -32,6 +32,7 @@ public class WelcomeExtraFragment extends BaseFragment {
     private String welcomeImageUrl = "";
     private int duration;
     private boolean canSkip;
+    private boolean isShowPoster;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class WelcomeExtraFragment extends BaseFragment {
             welcomeImageUrl = mActivity.postersBean.getPic();
             duration = mActivity.postersBean.getDuration();
             canSkip = mActivity.postersBean.isCanSkip();
+        } else {
+            isShowPoster = false;
         }
     }
 
@@ -61,25 +64,31 @@ public class WelcomeExtraFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        // 根据是否可以跳过来设置跳过按钮的显示
-        if (canSkip) {
-            mWelcomeJumpButton.setVisibility(View.VISIBLE);
-        } else {
-            mWelcomeJumpButton.setVisibility(View.GONE);
-        }
-        // 延时消息
-        mActivity.handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(mActivity, MainActivity.class));
-                mActivity.finish();
+        if (isShowPoster) {
+            // 根据是否可以跳过来设置跳过按钮的显示
+            if (canSkip) {
+                mWelcomeJumpButton.setVisibility(View.VISIBLE);
+            } else {
+                mWelcomeJumpButton.setVisibility(View.GONE);
             }
-        }, duration == 0 ? 2500 : duration);
-        // 加载图片
-        Glide.with(this)
-                .load(welcomeImageUrl)
-                .crossFade()
-                .centerCrop()
-                .into(mWelcomeExContainer);
+            // 延时消息
+            mActivity.handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(mActivity, MainActivity.class));
+                    mActivity.finish();
+                }
+            }, duration == 0 ? 2500 : duration);
+            // 加载图片
+            Glide.with(this)
+                    .load(welcomeImageUrl)
+                    .crossFade()
+                    .centerCrop()
+                    .into(mWelcomeExContainer);
+        } else {
+            mActivity.handler.removeCallbacksAndMessages(null);
+            startActivity(new Intent(mActivity, MainActivity.class));
+            mActivity.finish();
+        }
     }
 }

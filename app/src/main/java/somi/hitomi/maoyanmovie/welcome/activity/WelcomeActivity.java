@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.SparseArray;
 
-import com.orhanobut.logger.Logger;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -27,6 +27,7 @@ public class WelcomeActivity extends BaseActivity {
     private static final int WELCOME_MAIN = (2 << 5);
     private static final int WELCOME_EX = (2 << 5) + 1;
     public Handler handler = new Handler();
+    public List<MainInfoBean.PostersBean> postersBeans;
     public MainInfoBean.PostersBean postersBean;
     private SparseArray<Fragment> fragments;
 
@@ -61,8 +62,10 @@ public class WelcomeActivity extends BaseActivity {
                 .enqueue(new Callback<MainInfoBean>() {
                     @Override
                     public void onResponse(Call<MainInfoBean> call, Response<MainInfoBean> response) {
-                        postersBean = response.body().getPosters().get(0);
-                        Logger.i(postersBean.getPic());
+                        postersBeans = response.body().getPosters();
+                        if (postersBeans.size() != 0) {
+                            postersBean = postersBeans.get(0);
+                        }
                     }
 
                     @Override

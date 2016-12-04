@@ -115,5 +115,4 @@ public class ComingMovieFragment extends BaseFragment {
                 }
         );
     }
-
 }

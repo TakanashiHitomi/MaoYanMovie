@@ -44,6 +44,8 @@
         <!-- 高德地图定位结束 -->
         <activity android:name=".activity.MovieContentActivity">
         </activity>
+        <activity android:name=".activity.SearchActivity">
+        </activity>
     </application>
 
 </manifest>

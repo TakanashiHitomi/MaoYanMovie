@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        tools:context="somi.hitomi.maoyanmovie.activity.SearchActivity"
+        >
+
+    <TextView
+            android:id="@+id/search_title"
+            android:background="@drawable/title_search_bg"
+            android:padding="4dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_search"
+            android:textSize="12sp"
+            android:textColor="@color/material_grey_400"
+            android:text="找影视剧、影人、影院"
+            android:layout_toStartOf="@+id/search_cancel"
+            />
+
+    <Button
+            android:id="@+id/search_cancel"
+            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/search_title"
+            android:layout_alignBottom="@+id/search_title"
+            android:text="取消"
+            android:textColor="@color/white"
+            />
+
+</RelativeLayout>

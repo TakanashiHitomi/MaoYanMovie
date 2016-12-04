@@ -20,6 +20,9 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    /**
+     * 此方法与onCreate()中调用
+     */
     protected void getDataFromNet() {
     }
 }

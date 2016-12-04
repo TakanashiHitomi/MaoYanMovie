@@ -7,6 +7,7 @@ import android.widget.TextView;
 import somi.hitomi.maoyanmovie.adapter.ComingMovieAdapter;
 
 /**
+ * Sticky Header Listener<br/>
  * Created by HitomiT on 2016/12/1.
  */
 
