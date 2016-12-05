@@ -1,5 +1,6 @@
 package somi.hitomi.maoyanmovie.listener;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -21,7 +22,16 @@ public class StickyHeaderListener extends RecyclerView.OnScrollListener {
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            int firstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+            if (firstVisibleItemPosition == 0) {
+                mViewStickyHeader.setVisibility(View.GONE);
+                return;
+            } else {
+                mViewStickyHeader.setVisibility(View.VISIBLE);
+            }
+        }
         // Get the sticky information from the topmost view of the screen.
         View stickyInfoView = recyclerView.findChildViewUnder(
                 mViewStickyHeader.getMeasuredWidth() / 2, 5);

@@ -72,9 +72,15 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (getItemViewType(position) == NORMAL) {
             // 此处减2了，下面的方法中就不需要减了
             // 额外减去搜索框
-            bindNormalView((HotMovieListViewHolder) holder, position - 2);
+            if (bannerData != null) {
+                bindNormalView((HotMovieListViewHolder) holder, position - 2);
+            } else {
+                bindNormalView((HotMovieListViewHolder) holder, position - 1);
+            }
         } else if (getItemViewType(position) == BANNER) {
-            bindBannerView((HotMovieBannerViewHolder) holder);
+            if (bannerData != null) {
+                bindBannerView((HotMovieBannerViewHolder) holder);
+            }
         } else if (getItemViewType(position) == SEARCH_TITLE) {
             bindSearchView((SearchTitleViewHolder) holder);
         }
@@ -145,10 +151,17 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         });
     }
 
+    private int isBannerExist() {
+        if (bannerData == null) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 
     @Override
     public int getItemCount() {
-        return movies == null ? 0 : movies.size() + 2;
+        return movies == null ? 0 : movies.size() + 1 + isBannerExist();
     }
 
     @Override
@@ -157,7 +170,11 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (position == 0) {
             return SEARCH_TITLE;
         } else if (position == 1) {
-            return BANNER;
+            if (bannerData != null) {
+                return BANNER;
+            } else {
+                return NORMAL;
+            }
         } else return NORMAL;
     }
 }

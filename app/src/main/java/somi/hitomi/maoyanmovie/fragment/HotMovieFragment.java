@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
@@ -170,6 +169,6 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void onLoadMore() {
-        Toast.makeText(mActivity, "加载更多 > <", Toast.LENGTH_SHORT).show();
+
     }
 }

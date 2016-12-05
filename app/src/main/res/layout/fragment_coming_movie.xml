@@ -15,6 +15,10 @@
             android:scrollbars="vertical"
             />
 
-    <include layout="@layout/view_sticky_header"/>
+    <include
+            android:id="@+id/view_sticky_header"
+            android:visibility="gone"
+            layout="@layout/view_sticky_header"
+            />
 
 </FrameLayout>

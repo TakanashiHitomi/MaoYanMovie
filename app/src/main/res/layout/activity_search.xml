@@ -8,7 +8,7 @@
         android:background="@color/colorPrimary"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
         tools:context="somi.hitomi.maoyanmovie.activity.SearchActivity"
         >
 

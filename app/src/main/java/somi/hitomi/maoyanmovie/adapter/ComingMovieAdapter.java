@@ -1,6 +1,7 @@
 package somi.hitomi.maoyanmovie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import somi.hitomi.maoyanmovie.R;
+import somi.hitomi.maoyanmovie.activity.SearchActivity;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
 import somi.hitomi.maoyanmovie.utils.DateCompareUtil;
 import somi.hitomi.maoyanmovie.utils.DateUtils;
@@ -23,6 +25,7 @@ import somi.hitomi.maoyanmovie.utils.DensityUtils;
 import somi.hitomi.maoyanmovie.utils.ImageUrlDomainUtil;
 import somi.hitomi.maoyanmovie.viewholder.ComingMoviePreHeaderViewHolder;
 import somi.hitomi.maoyanmovie.viewholder.ComingMovieViewHolder;
+import somi.hitomi.maoyanmovie.viewholder.SearchTitleViewHolder;
 
 /**
  * Created by HitomiT on 2016/12/1.
@@ -35,6 +38,7 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public static final int ITEM_NORMAL = (2 << 5);
     public static final int ITEM_HEADER_PRE = (2 << 5) + 1;
+    private static final int SEARCH_TITLE = (2 << 5) + 2;
 
     private Context context;
     private List<ComingMovieBean.DataBean.ComingBean> comingBeanList;
@@ -48,7 +52,11 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //        aBigNews();
     }
 
-    // 按照日期排序
+    /**
+     * 按照日期排序<br/>
+     * 此方法不完整
+     */
+
     private void sortList() {
         Collections.sort(comingBeanList, new Comparator<ComingMovieBean.DataBean.ComingBean>() {
             @Override
@@ -73,8 +81,11 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     /**
-     * 将数据重复两次，以便测试效果
+     * 将数据重复两次，以便测试效果<br/>
+     * 由于获取了正确的数据，此方法弃用<br/>
+     * 不过说不定什么时候能用到。。。
      */
+    @Deprecated
     private void aBigNews() {
         List<ComingMovieBean.DataBean.ComingBean> littleWork = new ArrayList<>(comingBeanList.size() * 2);
         littleWork.addAll(comingBeanList);
@@ -96,19 +107,34 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     LayoutInflater.from(context)
                             .inflate(R.layout.coming_header_view_pre, parent, false)
             );
+        } else {
+            return new SearchTitleViewHolder(
+                    LayoutInflater.from(context).inflate(R.layout.view_search_title, parent, false)
+            );
         }
-        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof ComingMovieViewHolder) {
-            // 此处位置已减1
-            bindNormalView((ComingMovieViewHolder) viewHolder, position - 1);
+            // 此处位置已减2 额外的search title
+            bindNormalView((ComingMovieViewHolder) viewHolder, position - 2);
+            bindStickyHeader(viewHolder, position - 1);
         } else if (viewHolder instanceof ComingMoviePreHeaderViewHolder) {
             bindPreHeader((ComingMoviePreHeaderViewHolder) viewHolder);
+            bindStickyHeader(viewHolder, position - 1);
+        } else if (getItemViewType(position) == SEARCH_TITLE) {
+            bindSearchView((SearchTitleViewHolder) viewHolder);
         }
-        bindStickyHeader(viewHolder, position);
+    }
+
+    private void bindSearchView(SearchTitleViewHolder holder) {
+        holder.mSearchTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, SearchActivity.class));
+            }
+        });
     }
 
     private void bindStickyHeader(RecyclerView.ViewHolder viewHolder, int position) {
@@ -140,6 +166,8 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
+            return SEARCH_TITLE;
+        } else if (position == 1) {
             return ITEM_HEADER_PRE;
         }
         return ITEM_NORMAL;
@@ -179,8 +207,8 @@ public class ComingMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         // 还有两个头 加了一个了
+        // 加了一个搜索
         // 可能还有一个...大概
-        // 暂时不加头
-        return comingBeanList == null ? 0 : comingBeanList.size() + 1;
+        return comingBeanList == null ? 0 : comingBeanList.size() + 1 + 1;
     }
 }
