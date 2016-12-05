@@ -7,6 +7,7 @@ import retrofit2.http.Query;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBeanOld;
 import somi.hitomi.maoyanmovie.domain.ComingVideoPreBean;
+import somi.hitomi.maoyanmovie.domain.DiscoverBean;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MainInfoBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
@@ -37,13 +38,13 @@ public class RetrofitAPI {
         Call<HotMovieBannerBean> getHotMovieBanner();
     }
 
-    public interface WaitingMovieListAPI {
+    public interface ComingMovieListAPI {
         @GET("coming.json?ci=1&limit=12")
-        Call<ComingMovieBeanOld> getWaitingMovieList();
+        Call<ComingMovieBeanOld> getComingMovieList();
 
         //coming.json?offset=0&limit=50<&ci=1>
         @GET("coming.json")
-        Call<ComingMovieBean> getWaitingMovieList(
+        Call<ComingMovieBean> getComingMovieList(
                 @Query("offset") int offset,
                 @Query("limit") int limit);
     }
@@ -68,4 +69,11 @@ public class RetrofitAPI {
         Call<ComingVideoPreBean> getComingVideoPre();
     }
 
+    public interface DiscoverAPI {
+        @GET("feed.json")
+        Call<DiscoverBean> getDiscoverData(
+                @Query("offset") int offset,
+                @Query("limit") int limit
+        );
+    }
 }

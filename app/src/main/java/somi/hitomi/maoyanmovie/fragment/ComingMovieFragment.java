@@ -22,13 +22,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
-import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 import somi.hitomi.maoyanmovie.adapter.ComingMovieAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
 import somi.hitomi.maoyanmovie.listener.StickyHeaderListener;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
 import somi.hitomi.maoyanmovie.utils.BaseURL;
+import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 
 /**
  * Created by HitomiT on 2016/11/30.
@@ -69,11 +69,11 @@ public class ComingMovieFragment extends BaseFragment {
     @Override
     protected void getDataFromNet() {
         new Retrofit.Builder()
-                .baseUrl(BaseURL.WAITING_MOVIE_LIST_URL)
+                .baseUrl(BaseURL.COMING_MOVIE_LIST_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(RetrofitAPI.WaitingMovieListAPI.class)
-                .getWaitingMovieList(0, 50)
+                .create(RetrofitAPI.ComingMovieListAPI.class)
+                .getComingMovieList(0, 30)
                 .enqueue(new Callback<ComingMovieBean>() {
                     @Override
                     public void onResponse(Call<ComingMovieBean> call, Response<ComingMovieBean> response) {
