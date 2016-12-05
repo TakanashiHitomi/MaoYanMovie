@@ -12,6 +12,8 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.Collections;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.functions.Action1;
@@ -65,6 +67,7 @@ public class MainActivity extends BaseActivity {
         mMainBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
+                mMainContainer.showEmpty(null, null, null, Collections.<Integer>emptyList());
                 switchFragment(fragments.get(currentTabId), fragments.get(tabId));
                 currentTabId = tabId;
             }
@@ -83,7 +86,8 @@ public class MainActivity extends BaseActivity {
     private void switchFragment(Fragment from, Fragment to) {
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+//                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                ;
 
         if (from != null) {
             transaction.hide(from);

@@ -145,14 +145,20 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
                 initAdapter();
                 if (isBannerExist) {
                     hotMovieListAdapter.setBanner(bannerData);
-                    mainContainer.showContent();
                     mSwipeRefreshLayout.onFinishFreshAndLoad();
                 }
             }
         } else {
             hotMovieListAdapter.setBanner(bannerData);
-            mainContainer.showContent();
             mSwipeRefreshLayout.onFinishFreshAndLoad();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            mainContainer.showContent();
         }
     }
 
