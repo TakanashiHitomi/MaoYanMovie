@@ -86,6 +86,7 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
                     @Override
                     public void onResponse(Call<MovieListBean> call, Response<MovieListBean> response) {
                         movies = response.body().getData().getHot();
+                        Logger.i(response.body().toString());
                         setAdapter(false);
                     }
 

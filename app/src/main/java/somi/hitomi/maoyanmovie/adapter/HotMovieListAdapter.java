@@ -47,7 +47,7 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void setBanner(List<HotMovieBannerBean.DataBean> bannerData) {
         this.bannerData = bannerData;
-        notifyDataSetChanged();
+        notifyItemInserted(0);
     }
 
     @Override

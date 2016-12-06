@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/loading_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+        <include layout="@layout/theater_title"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_theater"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout>
