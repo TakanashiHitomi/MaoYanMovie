@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/loading_page"
         >
 
-    <include layout="@layout/view_search_title"/>
-
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_discover"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:orientation="vertical"
+            >
 
-</LinearLayout>
+        <include
+                layout="@layout/view_search_title"
+                android:id="@+id/view_search_title"
+                />
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_discover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+    </LinearLayout>
+
+</somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout>

@@ -41,6 +41,8 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
     RecyclerView mMovieHotList;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.loading_page)
+    LoadingStateFrameLayout mLoadingPage;
 
     private List<MovieListBean.DataBean.HotBean> movies;
     private MainActivity mActivity;
@@ -48,7 +50,6 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
 
     private boolean isBannerExist = false;
     private HotMovieListAdapter hotMovieListAdapter;
-    private LoadingStateFrameLayout mainContainer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,8 +68,7 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mainContainer = mActivity.getMainContainer();
-        mainContainer.showLoading();
+        mLoadingPage.showLoading();
         // 设置下拉刷新监听器
         mSwipeRefreshLayout.setListener(this);
         mSwipeRefreshLayout.setHeader(new RotationHeader(mActivity));
@@ -122,7 +122,7 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
      * 太长所以拿出来了
      */
     private void showError() {
-        mainContainer.showError(
+        mLoadingPage.showError(
                 mActivity.getDrawable(R.drawable.error_internet_image),
                 getString(R.string.progressActivityEmptyTitlePlaceholder),
                 getString(R.string.progressActivityEmptyContentPlaceholder),
@@ -131,7 +131,7 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
                     @Override
                     public void onClick(View view) {
                         getDataFromNet();
-                        mainContainer.showLoading();
+                        mLoadingPage.showLoading();
                     }
                 }
         );
@@ -146,19 +146,13 @@ public class HotMovieFragment extends BaseFragment implements SwipeRefreshLayout
                 if (isBannerExist) {
                     hotMovieListAdapter.setBanner(bannerData);
                     mSwipeRefreshLayout.onFinishFreshAndLoad();
+                    mLoadingPage.showContent();
                 }
             }
         } else {
             hotMovieListAdapter.setBanner(bannerData);
             mSwipeRefreshLayout.onFinishFreshAndLoad();
-        }
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            mainContainer.showContent();
+            mLoadingPage.showContent();
         }
     }
 

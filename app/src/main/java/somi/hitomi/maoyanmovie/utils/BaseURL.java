@@ -14,4 +14,5 @@ public class BaseURL {
     public static final String MOVIE_CONTENT_URL = "http://maoyan.com/s/movie/";
     public static final String COMING_MOVIE_PRE_URL = "http://api.maoyan.com/mmdb/movie/lp/";
     public static final String DISCOVER_URL = "http://api.maoyan.com/sns/v5/";
+    public static final String THEATER_URL = "http://m.maoyan.com/";
 }

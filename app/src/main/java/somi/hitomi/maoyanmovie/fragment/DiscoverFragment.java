@@ -40,17 +40,16 @@ public class DiscoverFragment extends BaseFragment {
 
     @BindView(R.id.rv_discover)
     RecyclerView mRvDiscover;
+    @BindView(R.id.loading_page)
+    LoadingStateFrameLayout mLoadingPage;
     private MainActivity mActivity;
     private List<DiscoverBean.DataBean.FeedsBean> feeds;
     private DiscoverAdapter discoverAdapter;
-    private LoadingStateFrameLayout mainContainer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (MainActivity) getActivity();
-        mainContainer = mActivity.getMainContainer();
-        mainContainer.showLoading();
     }
 
     @Nullable
@@ -60,6 +59,12 @@ public class DiscoverFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         initRecyclerView();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mLoadingPage.showLoading();
     }
 
     private void initRecyclerView() {
@@ -96,7 +101,7 @@ public class DiscoverFragment extends BaseFragment {
     private void setData(DiscoverBean.DataBean data) {
         feeds = data.getFeeds();
         discoverAdapter.setFeeds(feeds);
-        mainContainer.showContent();
+        mLoadingPage.showContent();
     }
 
     /**
@@ -104,7 +109,7 @@ public class DiscoverFragment extends BaseFragment {
      * 太长所以拿出来了
      */
     private void showError() {
-        mainContainer.showError(
+        mLoadingPage.showError(
                 mActivity.getDrawable(R.drawable.error_internet_image),
                 getString(R.string.progressActivityEmptyTitlePlaceholder),
                 getString(R.string.progressActivityEmptyContentPlaceholder),
@@ -113,7 +118,7 @@ public class DiscoverFragment extends BaseFragment {
                     @Override
                     public void onClick(View view) {
                         getDataFromNet();
-                        mainContainer.showLoading();
+                        mLoadingPage.showLoading();
                     }
                 }
         );

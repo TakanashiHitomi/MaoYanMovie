@@ -40,9 +40,10 @@ public class ComingMovieFragment extends BaseFragment {
     RecyclerView mMovieWaitingList;
     @BindView(R.id.view_sticky_header)
     TextView mViewStickyHeader;
+    @BindView(R.id.loading_page)
+    LoadingStateFrameLayout mLoadingPage;
 
     private MainActivity mActivity;
-    private LoadingStateFrameLayout mainContainer;
     private List<ComingMovieBean.DataBean.ComingBean> mComingList;
 
     @Override
@@ -62,8 +63,7 @@ public class ComingMovieFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mainContainer = mActivity.getMainContainer();
-        mainContainer.showLoading();
+        mLoadingPage.showLoading();
     }
 
     @Override
@@ -94,6 +94,7 @@ public class ComingMovieFragment extends BaseFragment {
         mMovieWaitingList.setLayoutManager(new LinearLayoutManager(mActivity));
         mMovieWaitingList.setAdapter(new ComingMovieAdapter(mActivity, mComingList));
         mMovieWaitingList.addOnScrollListener(new StickyHeaderListener(mViewStickyHeader));
+        mLoadingPage.showContent();
     }
 
     /**
@@ -101,7 +102,7 @@ public class ComingMovieFragment extends BaseFragment {
      * 太长所以拿出来了
      */
     private void showError() {
-        mainContainer.showError(
+        mLoadingPage.showError(
                 mActivity.getDrawable(R.drawable.error_internet_image),
                 getString(R.string.progressActivityEmptyTitlePlaceholder),
                 getString(R.string.progressActivityEmptyContentPlaceholder),
@@ -110,7 +111,7 @@ public class ComingMovieFragment extends BaseFragment {
                     @Override
                     public void onClick(View view) {
                         getDataFromNet();
-                        mainContainer.showLoading();
+                        mLoadingPage.showLoading();
                     }
                 }
         );

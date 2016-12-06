@@ -9,7 +9,7 @@
         tools:context="somi.hitomi.maoyanmovie.activity.MainActivity"
         >
 
-    <somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout
+    <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

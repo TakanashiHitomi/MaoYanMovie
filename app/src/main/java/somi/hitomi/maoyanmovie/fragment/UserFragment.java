@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
+import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 
 /**
  * User Fragment
@@ -17,6 +20,8 @@ import somi.hitomi.maoyanmovie.common.BaseFragment;
 
 public class UserFragment extends BaseFragment {
 
+    @BindView(R.id.loading_page)
+    LoadingStateFrameLayout mLoadingPage;
     private MainActivity mActivity;
 
     @Override
@@ -28,6 +33,13 @@ public class UserFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }

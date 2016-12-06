@@ -1,272 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/loading_page"
         >
 
-    <LinearLayout
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             >
 
         <LinearLayout
-                android:id="@+id/ll_login"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#e7331a"
-                android:orientation="horizontal"
-                android:padding="15dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 >
 
-            <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/background_logo"
+            <LinearLayout
+                    android:id="@+id/ll_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="#e7331a"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    >
+
+                <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/background_logo"
+                        />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableEnd="@drawable/triangel01"
+                        android:paddingStart="20dp"
+                        android:text="立即登录"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    >
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/ic_wanna"
+                        android:text="想看"
+                        />
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/ic_watched"
+                        android:text="看过"
+                        />
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/ic_cinecism"
+                        android:text="影评"
+                        />
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/ic_topic"
+                        android:text="话题"
+                        />
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:alpha="0.3"
+                    android:background="#33000000"
                     />
 
-            <TextView
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:drawableEnd="@drawable/triangel01"
-                    android:paddingStart="20dp"
-                    android:text="立即登录"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp"
-                    />
-        </LinearLayout>
+                    android:padding="12dp"
+                    >
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                >
+                <TextView
+                        android:textSize="16sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我的订单"
+                        android:textColor="#cc000000"
+                        />
 
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/ic_wanna"
-                    android:text="想看"
-                    />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/triangle"
+                        android:text="全部"
+                        android:textColor="#aa000000"
+                        android:textSize="12sp"
+                        />
+            </LinearLayout>
 
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/ic_watched"
-                    android:text="看过"
-                    />
-
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/ic_cinecism"
-                    android:text="影评"
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
                     />
 
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/ic_topic"
-                    android:text="话题"
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    >
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/vo"
+                        android:text="未消费"
+                        />
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/vn"
+                        android:text="待付款"
+                        />
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/vm"
+                        android:text="待评价"
+                        />
+
+                <TextView
+                        style="@style/MyMeTextView"
+                        android:drawableTop="@drawable/vk"
+                        android:text="退款"
+                        />
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:alpha="0.3"
+                    android:background="#33000000"
                     />
-        </LinearLayout>
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:alpha="0.3"
-                android:background="#33000000"
-                />
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                >
 
             <TextView
-                    android:textSize="16sp"
-                    android:layout_width="0dp"
+                    style="@style/MyMeTextView2"
+                    android:text="我的消息"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
+                    />
+
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="我的收藏"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
+                    />
+
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="会员中心"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
+                    />
+
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="我的成就"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:alpha="0.3"
+                    android:background="#33000000"
+                    />
+
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="美团钱包"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
+                    />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    >
+
+                <TextView
+                        android:textSize="16sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我的余额"
+                        android:textColor="#000000"
+                        />
+
+                <TextView
+                        android:textColor="#aa000000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/triangle"
+                        android:text="0.00元"
+                        android:textSize="12sp"
+                        />
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
+                    />
+
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="优惠券"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#22000000"
+                    />
+
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="商城"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:alpha="0.3"
+                    android:background="#33000000"
+                    />
+            <TextView
+                    style="@style/MyMeTextView2"
+                    android:text="设置"
+                    />
+            <View
+                    android:alpha="0.3"
+                    android:background="#33000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="我的订单"
-                    android:textColor="#cc000000"
-                    />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/triangle"
-                    android:text="全部"
-                    android:textColor="#aa000000"
-                    android:textSize="12sp"
                     />
         </LinearLayout>
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                >
-
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/vo"
-                    android:text="未消费"
-                    />
-
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/vn"
-                    android:text="待付款"
-                    />
-
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/vm"
-                    android:text="待评价"
-                    />
-
-            <TextView
-                    style="@style/MyMeTextView"
-                    android:drawableTop="@drawable/vk"
-                    android:text="退款"
-                    />
-        </LinearLayout>
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:alpha="0.3"
-                android:background="#33000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="我的消息"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="我的收藏"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="会员中心"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="我的成就"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:alpha="0.3"
-                android:background="#33000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="美团钱包"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                >
-
-            <TextView
-                    android:textSize="16sp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="我的余额"
-                    android:textColor="#000000"
-                    />
-
-            <TextView
-                    android:textColor="#aa000000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/triangle"
-                    android:text="0.00元"
-                    android:textSize="12sp"
-                    />
-        </LinearLayout>
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="优惠券"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22000000"
-                />
-
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="商城"
-                />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:alpha="0.3"
-                android:background="#33000000"
-                />
-        <TextView
-                style="@style/MyMeTextView2"
-                android:text="设置"
-                />
-        <View
-                android:alpha="0.3"
-                android:background="#33000000"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                />
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout>
