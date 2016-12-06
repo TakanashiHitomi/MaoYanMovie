@@ -11,6 +11,7 @@ import somi.hitomi.maoyanmovie.domain.DiscoverBean;
 import somi.hitomi.maoyanmovie.domain.HotMovieBannerBean;
 import somi.hitomi.maoyanmovie.domain.MainInfoBean;
 import somi.hitomi.maoyanmovie.domain.MovieListBean;
+import somi.hitomi.maoyanmovie.domain.TheaterBean;
 
 /**
  * API for Retrofit
@@ -76,4 +77,10 @@ public class RetrofitAPI {
                 @Query("limit") int limit
         );
     }
+
+    public interface TheaterAPI {
+        @GET("cinemas.json")
+        Call<TheaterBean> getTheaterData();
+    }
+
 }

@@ -3,6 +3,7 @@ package somi.hitomi.maoyanmovie.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,27 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
+import java.util.HashMap;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
+import somi.hitomi.maoyanmovie.adapter.TheaterAdapter;
 import somi.hitomi.maoyanmovie.city_picker.activity.CityPickerActivity;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
+import somi.hitomi.maoyanmovie.domain.TheaterBean;
+import somi.hitomi.maoyanmovie.net.RetrofitAPI;
+import somi.hitomi.maoyanmovie.utils.BaseURL;
 import somi.hitomi.maoyanmovie.widget.LoadingStateFrameLayout;
 
 import static android.app.Activity.RESULT_OK;
@@ -40,6 +55,9 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
     @BindView(R.id.theater_filter)
     ImageView mTheaterFilter;
     private MainActivity mActivity;
+    private TheaterBean.DataBean data;
+    private TheaterAdapter theaterAdapter;
+    private HashMap<String, List<TheaterBean.DataBean.TheaterDetailBean>> allDetailBeanList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +78,75 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
         super.onViewCreated(view, savedInstanceState);
         mTheaterFilter.setOnClickListener(this);
         mTheaterSearch.setOnClickListener(this);
+        mLoadingPage.showLoading();
+        mRvTheater.setLayoutManager(new LinearLayoutManager(mActivity));
+        theaterAdapter = new TheaterAdapter(mActivity);
+        mRvTheater.setAdapter(theaterAdapter);
+    }
+
+    @Override
+    protected void getDataFromNet() {
+        new Retrofit.Builder()
+                .baseUrl(BaseURL.THEATER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(RetrofitAPI.TheaterAPI.class)
+                .getTheaterData()
+                .enqueue(new Callback<TheaterBean>() {
+                    @Override
+                    public void onResponse(Call<TheaterBean> call, Response<TheaterBean> response) {
+                        data = response.body().getData();
+                        preDealData();
+                        theaterAdapter.setData(allDetailBeanList.get("朝阳区"));
+                        mLoadingPage.showContent();
+                    }
+
+                    @Override
+                    public void onFailure(Call<TheaterBean> call, Throwable t) {
+                        Logger.e(t.getMessage());
+                        showError();
+                    }
+                });
+    }
+
+    private void preDealData() {
+        allDetailBeanList = new HashMap<>();
+        allDetailBeanList.put("朝阳区", data.getChaoyangQu());
+        allDetailBeanList.put("海淀区", data.getHaidianQu());
+        allDetailBeanList.put("大兴区", data.getDaxingQu());
+        allDetailBeanList.put("东城区", data.getDongchengQu());
+        allDetailBeanList.put("丰台区", data.getFengtaiQu());
+        allDetailBeanList.put("西城区", data.getXichengQu());
+        allDetailBeanList.put("通州区", data.getTongzhouQu());
+        allDetailBeanList.put("昌平区", data.getChangpingQu());
+        allDetailBeanList.put("房山区", data.getFangshanQu());
+        allDetailBeanList.put("顺义区", data.getShunyiQu());
+        allDetailBeanList.put("门头沟区", data.getMentougouQu());
+        allDetailBeanList.put("石景山区", data.getShijingshanQu());
+        allDetailBeanList.put("怀柔区", data.getHuairouQu());
+        allDetailBeanList.put("平谷区", data.getPingguQu());
+        allDetailBeanList.put("密云县", data.getMiyunXian());
+        allDetailBeanList.put("延庆县", data.getYanqingXian());
+    }
+
+    /**
+     * 错误页面显示
+     * 太长所以拿出来了
+     */
+    private void showError() {
+        mLoadingPage.showError(
+                mActivity.getDrawable(R.drawable.error_internet_image),
+                getString(R.string.progressActivityEmptyTitlePlaceholder),
+                getString(R.string.progressActivityEmptyContentPlaceholder),
+                getString(R.string.progressActivityErrorButton),
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getDataFromNet();
+                        mLoadingPage.showLoading();
+                    }
+                }
+        );
     }
 
     @OnClick(R.id.theater_city)

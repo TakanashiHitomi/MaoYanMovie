@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        >
+
+    <TextView
+            android:id="@+id/theater_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="青春光线影院"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp"
+            />
+
+    <TextView
+            android:gravity="center"
+            android:id="@+id/theater_sell_price"
+            android:layout_toEndOf="@+id/theater_name"
+            android:text="48"
+            android:textSize="15sp"
+            android:layout_alignTop="@+id/theater_name"
+            android:layout_alignBottom="@+id/theater_name"
+            android:textColor="@color/material_red_700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            />
+    <TextView
+            android:text="元起"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_alignTop="@+id/theater_name"
+            android:layout_alignBottom="@+id/theater_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/theater_sell_price"
+            />
+
+    <TextView
+            android:id="@+id/item_addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/theater_name"
+            android:text="东城区东滨河路乙一号雍和航星园内"
+            android:maxLines="1"
+            android:layout_marginBottom="8dp"
+            />
+
+    <LinearLayout
+            android:layout_below="@+id/item_addr"
+            android:id="@+id/item_service"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeeeee"
+            android:layout_below="@+id/item_service"
+            />
+
+</RelativeLayout>
