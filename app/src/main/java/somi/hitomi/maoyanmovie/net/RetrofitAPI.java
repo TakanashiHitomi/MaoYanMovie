@@ -4,6 +4,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rx.Observable;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBean;
 import somi.hitomi.maoyanmovie.domain.ComingMovieBeanOld;
 import somi.hitomi.maoyanmovie.domain.ComingVideoPreBean;
@@ -80,7 +81,7 @@ public class RetrofitAPI {
 
     public interface TheaterAPI {
         @GET("cinemas.json")
-        Call<TheaterBean> getTheaterData();
+        Observable<TheaterBean> getTheaterData();
     }
 
 }

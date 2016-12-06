@@ -36,10 +36,10 @@ public class TheaterAdapter extends RecyclerView.Adapter {
     }
 
     private void bindNormalView(TheaterViewHolder holder, int position) {
-//        TheaterBean.DataBean.TheaterDetailBean detailBean = allDetailBeanList.get(position);
-//        holder.mTheaterName.setText(detailBean.getNm());
-//        holder.mTheaterSellPrice.setText(detailBean.getSellPrice() + "");
-//        holder.mItemAddr.setText(detailBean.getAddr());
+        TheaterBean.DataBean.TheaterDetailBean detailBean = data.get(position);
+        holder.mTheaterName.setText(detailBean.getNm());
+        holder.mTheaterSellPrice.setText(detailBean.getSellPrice() + "");
+        holder.mItemAddr.setText(detailBean.getAddr());
     }
 
     @Override

@@ -20,11 +20,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
 import somi.hitomi.maoyanmovie.adapter.TheaterAdapter;
@@ -89,24 +91,39 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
         new Retrofit.Builder()
                 .baseUrl(BaseURL.THEATER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
                 .create(RetrofitAPI.TheaterAPI.class)
                 .getTheaterData()
-                .enqueue(new Callback<TheaterBean>() {
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.io())
+                .doOnNext(new Action1<TheaterBean>() {
                     @Override
-                    public void onResponse(Call<TheaterBean> call, Response<TheaterBean> response) {
-                        data = response.body().getData();
+                    public void call(TheaterBean theaterBean) {
+                        data = theaterBean.getData();
                         preDealData();
                         theaterAdapter.setData(allDetailBeanList.get("朝阳区"));
-                        mLoadingPage.showContent();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<TheaterBean>() {
+                    @Override
+                    public void onCompleted() {
+
                     }
 
                     @Override
-                    public void onFailure(Call<TheaterBean> call, Throwable t) {
-                        Logger.e(t.getMessage());
+                    public void onError(Throwable e) {
+                        Logger.e(e.getMessage());
                         showError();
                     }
-                });
+
+                    @Override
+                    public void onNext(TheaterBean theaterBean) {
+                        mLoadingPage.showContent();
+                    }
+                })
+        ;
     }
 
     private void preDealData() {
