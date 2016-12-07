@@ -1,6 +1,7 @@
 package somi.hitomi.maoyanmovie.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.PopupWindow;
 
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,8 +32,10 @@ import rx.schedulers.Schedulers;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
 import somi.hitomi.maoyanmovie.activity.SearchActivity;
+import somi.hitomi.maoyanmovie.adapter.PlainStringAdapter;
 import somi.hitomi.maoyanmovie.adapter.TheaterAdapter;
 import somi.hitomi.maoyanmovie.city_picker.activity.CityPickerActivity;
+import somi.hitomi.maoyanmovie.common.BaseClickableRecyclerViewAdapter;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
 import somi.hitomi.maoyanmovie.domain.TheaterBean;
 import somi.hitomi.maoyanmovie.net.RetrofitAPI;
@@ -61,6 +65,7 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
     private TheaterBean.DataBean data;
     private TheaterAdapter theaterAdapter;
     private HashMap<String, List<TheaterBean.DataBean.TheaterDetailBean>> allDetailBeanList;
+    private PopupWindow popupWindow;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +78,60 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_theater, container, false);
         ButterKnife.bind(this, view);
+        initPopupWindow(null);
         return view;
+    }
+
+    private void initPopupWindow(@Nullable Bundle savedInstanceState) {
+        View inflate = getLayoutInflater(savedInstanceState).inflate(R.layout.view_theater_filter, null, false);
+        popupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0xb0000000));
+        RecyclerView list1 = (RecyclerView) inflate.findViewById(R.id.filter_list1);
+        final RecyclerView list2 = (RecyclerView) inflate.findViewById(R.id.filter_list2);
+        RecyclerView list3 = (RecyclerView) inflate.findViewById(R.id.filter_list3);
+
+        list1.setLayoutManager(new LinearLayoutManager(mActivity));
+        list2.setLayoutManager(new LinearLayoutManager(mActivity));
+        list3.setLayoutManager(new LinearLayoutManager(mActivity));
+
+
+        ArrayList<String> arrayList1 = new ArrayList<>();
+        arrayList1.add("商圈");
+        arrayList1.add("地铁站");
+
+        final ArrayList<String> arrayList2 = new ArrayList<>();
+
+        arrayList2.add("朝阳区");
+        arrayList2.add("海淀区");
+        arrayList2.add("大兴区");
+        arrayList2.add("东城区");
+        arrayList2.add("丰台区");
+        arrayList2.add("西城区");
+        arrayList2.add("通州区");
+        arrayList2.add("昌平区");
+        arrayList2.add("房山区");
+        arrayList2.add("顺义区");
+        arrayList2.add("门头沟区");
+        arrayList2.add("石景山区");
+        arrayList2.add("怀柔区");
+        arrayList2.add("平谷区");
+        arrayList2.add("密云县");
+        arrayList2.add("延庆县");
+
+        list1.setAdapter(new PlainStringAdapter(mActivity, arrayList1));
+        PlainStringAdapter list2Adapter = new PlainStringAdapter(mActivity, arrayList2);
+        list2Adapter.setOnItemClickListener(new BaseClickableRecyclerViewAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String location = arrayList2.get(position);
+                theaterAdapter.setData(allDetailBeanList.get(location));
+                if (popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        list2.setAdapter(list2Adapter);
+        list3.setAdapter(new PlainStringAdapter(mActivity));
     }
 
     @Override
@@ -183,8 +241,11 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.theater_filter) {
-            PopupWindow popupWindow = new PopupWindow(View.inflate(mActivity, R.layout.view_theater_filter, null));
-            popupWindow.setFocusable(true);
+            if (!popupWindow.isShowing()) {
+                popupWindow.showAsDropDown(mTheaterCity);
+            } else {
+                popupWindow.dismiss();
+            }
         } else if (view.getId() == R.id.theater_search) {
             startActivity(new Intent(mActivity, SearchActivity.class));
         }

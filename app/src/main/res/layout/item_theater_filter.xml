@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@color/material_grey_200"
+        android:id="@+id/item_theater_filter_str"
+        android:text="昌平区"
+        android:textSize="20sp"
+        />

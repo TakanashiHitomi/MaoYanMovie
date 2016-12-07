@@ -66,7 +66,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter {
     }
 
     private void bindStyle2(DiscoverStyle2ViewHolder holder, DiscoverBean.DataBean.FeedsBean feedsBean) {
-        holder.mItemNick.setText(feedsBean.getUser().getNickName());
+        holder.mItemNick.setText(feedsBean.getUser() == null ? "" : feedsBean.getUser().getNickName());
         holder.mItemContent.setText(feedsBean.getTitle());
         holder.mItemCommit.setText(feedsBean.getCommentCount() + "");
         holder.mItemSaw.setText(feedsBean.getViewCount() + "");
