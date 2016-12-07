@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.PopupWindow;
 
 import com.orhanobut.logger.Logger;
 
@@ -29,6 +29,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import somi.hitomi.maoyanmovie.R;
 import somi.hitomi.maoyanmovie.activity.MainActivity;
+import somi.hitomi.maoyanmovie.activity.SearchActivity;
 import somi.hitomi.maoyanmovie.adapter.TheaterAdapter;
 import somi.hitomi.maoyanmovie.city_picker.activity.CityPickerActivity;
 import somi.hitomi.maoyanmovie.common.BaseFragment;
@@ -182,9 +183,10 @@ public class TheaterFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.theater_filter) {
-            Toast.makeText(mActivity, "Theater Filter", Toast.LENGTH_SHORT).show();
+            PopupWindow popupWindow = new PopupWindow(View.inflate(mActivity, R.layout.view_theater_filter, null));
+            popupWindow.setFocusable(true);
         } else if (view.getId() == R.id.theater_search) {
-            Toast.makeText(mActivity, "Theater Search", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(mActivity, SearchActivity.class));
         }
     }
 }
