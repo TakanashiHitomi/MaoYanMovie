@@ -32,19 +32,12 @@ public class WelcomeExtraFragment extends BaseFragment {
     private String welcomeImageUrl = "";
     private int duration;
     private boolean canSkip;
-    private boolean isShowPoster;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (WelcomeActivity) getActivity();
-        if (mActivity.postersBean != null) {
-            welcomeImageUrl = mActivity.postersBean.getPic();
-            duration = mActivity.postersBean.getDuration();
-            canSkip = mActivity.postersBean.isCanSkip();
-        } else {
-            isShowPoster = false;
-        }
+
     }
 
     @Nullable
@@ -55,16 +48,13 @@ public class WelcomeExtraFragment extends BaseFragment {
         return view;
     }
 
-    @OnClick(R.id.welcome_jump_button)
-    void onCanJumpClick() {
-        mActivity.handler.removeCallbacksAndMessages(null);
-        startActivity(new Intent(mActivity, MainActivity.class));
-        mActivity.finish();
-    }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        if (isShowPoster) {
+        if (mActivity.postersBean != null) {
+            welcomeImageUrl = mActivity.postersBean.getPic();
+            duration = mActivity.postersBean.getDuration();
+            canSkip = mActivity.postersBean.isCanSkip();
+
             // 根据是否可以跳过来设置跳过按钮的显示
             if (canSkip) {
                 mWelcomeJumpButton.setVisibility(View.VISIBLE);
@@ -90,5 +80,12 @@ public class WelcomeExtraFragment extends BaseFragment {
             startActivity(new Intent(mActivity, MainActivity.class));
             mActivity.finish();
         }
+    }
+
+    @OnClick(R.id.welcome_jump_button)
+    void onCanJumpClick() {
+        mActivity.handler.removeCallbacksAndMessages(null);
+        startActivity(new Intent(mActivity, MainActivity.class));
+        mActivity.finish();
     }
 }

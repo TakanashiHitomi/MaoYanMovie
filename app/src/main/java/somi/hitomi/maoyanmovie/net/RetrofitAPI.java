@@ -21,7 +21,7 @@ import somi.hitomi.maoyanmovie.domain.TheaterBean;
 
 public class RetrofitAPI {
     public interface WelcomeInfoAPI {
-        @GET("posters.json")
+        @GET("posters.json?poster_type=1&__vhost=api.maoyan.com")
         Call<MainInfoBean> getMainInfo();
     }
 

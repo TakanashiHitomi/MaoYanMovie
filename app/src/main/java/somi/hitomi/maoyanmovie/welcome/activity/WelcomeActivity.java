@@ -47,7 +47,7 @@ public class WelcomeActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                switchFragment(fragments.get(WELCOME_MAIN), fragments.get(WELCOME_EX));
+                switchFragment(fragments.get(WELCOME_MAIN), new WelcomeExtraFragment());
             }
         }, 1500);
     }
@@ -79,7 +79,6 @@ public class WelcomeActivity extends BaseActivity {
     private void initFragment() {
         fragments = new SparseArray<>();
         fragments.put(WELCOME_MAIN, new WelcomeMainFragment());
-        fragments.put(WELCOME_EX, new WelcomeExtraFragment());
     }
 
     private void switchFragment(Fragment from, Fragment to) {
