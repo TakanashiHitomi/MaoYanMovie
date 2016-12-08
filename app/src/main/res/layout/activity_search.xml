@@ -14,6 +14,7 @@
 
     <TextView
             android:id="@+id/search_title"
+            android:transitionName="search_title"
             android:background="@drawable/title_search_bg"
             android:padding="4dp"
             android:gravity="center_vertical"

@@ -2,6 +2,9 @@ package somi.hitomi.maoyanmovie.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,11 +89,16 @@ public class HotMovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    private void bindSearchView(SearchTitleViewHolder holder) {
+    private void bindSearchView(final SearchTitleViewHolder holder) {
         holder.mSearchTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, SearchActivity.class));
+                ActivityCompat.startActivity(
+                        context,
+                        new Intent(context, SearchActivity.class),
+                        ActivityOptionsCompat.makeSceneTransitionAnimation((AppCompatActivity) context, holder.mSearchTitle, "search_title")
+                                .toBundle()
+                );
             }
         });
     }

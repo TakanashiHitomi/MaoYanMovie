@@ -3,11 +3,13 @@ package somi.hitomi.maoyanmovie.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 
@@ -42,6 +44,8 @@ public class DiscoverFragment extends BaseFragment {
     RecyclerView mRvDiscover;
     @BindView(R.id.loading_page)
     LoadingStateFrameLayout mLoadingPage;
+    @BindView(R.id.search_title)
+    TextView mSearchTitle;
     private MainActivity mActivity;
     private List<DiscoverBean.DataBean.FeedsBean> feeds;
     private DiscoverAdapter discoverAdapter;
@@ -126,6 +130,10 @@ public class DiscoverFragment extends BaseFragment {
 
     @OnClick(R.id.search_title)
     void onSearchTitleClick() {
-        startActivity(new Intent(mActivity, SearchActivity.class));
+        startActivity(
+                new Intent(mActivity, SearchActivity.class),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, mSearchTitle, "search_title")
+                        .toBundle()
+        );
     }
 }
